@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ColorInChic — Revista digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --marfil:#F3EFE8;
+  --papel:#FFFFFF;
+  --negro:#131110;
+  --gris:#7A736D;
+  --gris2:#ABA49D;
+  --edicion:#D6006B;
+  --borde:rgba(19,17,16,.15);
+  --bar:52px;
+  --barb:66px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--marfil);scroll-padding-top:calc(var(--bar) + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--marfil);color:var(--negro);
+  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+:focus-visible{outline:2px solid var(--edicion);outline-offset:2px}
+.serif{font-family:"Bodoni Moda","Didot",Georgia,serif}
+
+/* ── barra superior ── */
+.top{position:fixed;top:0;left:0;right:0;z-index:30;background:rgba(243,239,232,.96);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--borde);padding-top:env(safe-area-inset-top,0px)}
+.top__in{height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px;max-width:1080px;margin:0 auto}
+.logo{font-family:"Bodoni Moda",Georgia,serif;font-weight:900;font-size:18px;letter-spacing:-.02em;line-height:1;padding:0}
+.logo i{font-style:normal;color:var(--edicion)}
+.top__sp{margin-left:auto;display:flex;align-items:center;gap:14px}
+.lang{font-size:11px;letter-spacing:.08em;color:var(--gris)}
+.lang b{color:var(--negro);font-weight:600}
+.burger{font-size:11px;letter-spacing:.14em;border:1px solid var(--borde);padding:7px 11px}
+
+/* ── menú ── */
+#menu{position:fixed;inset:0;z-index:40;background:var(--marfil);overflow-y:auto;display:none;
+  padding:calc(var(--bar) + 18px + env(safe-area-inset-top,0px)) 20px calc(40px + env(safe-area-inset-bottom,0px))}
+body[data-menu="1"] #menu{display:block}
+.menu__grp{max-width:520px;margin:0 auto 26px}
+.menu__lbl{font-size:9.5px;letter-spacing:.18em;color:var(--gris2);margin:0 0 10px}
+#menu button{display:block;width:100%;padding:12px 0;border-bottom:1px solid var(--borde);font-size:16px}
+#menu button em{font-style:italic;font-family:"Bodoni Moda",Georgia,serif;color:var(--gris);font-size:13px;margin-left:8px}
+
+/* ── vistas ── */
+.view{display:none}
+.view.on{display:block}
+main{padding-top:calc(var(--bar) + env(safe-area-inset-top,0px))}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+
+/* ── cabecera de marca ── */
+.brand{text-align:center;padding:30px 0 18px;border-bottom:1px solid var(--borde)}
+.brand h1{font-family:"Bodoni Moda",Georgia,serif;font-weight:900;font-size:clamp(40px,13vw,86px);
+  line-height:.86;letter-spacing:-.035em;margin:0;color:var(--edicion)}
+.brand .kw{font-size:clamp(9px,2.6vw,12px);letter-spacing:.34em;margin:12px 0 0}
+.brand .tag{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-size:clamp(10px,2.8vw,13px);
+  color:var(--gris);margin:7px 0 0}
+.brand .meta{font-size:9px;letter-spacing:.15em;color:var(--gris2);margin:14px 0 0;line-height:1.9}
+
+/* ── navegación de secciones ── */
+.snav{border-bottom:1px solid var(--borde);overflow-x:auto;scrollbar-width:none}
+.snav::-webkit-scrollbar{display:none}
+.snav__in{display:flex;gap:20px;padding:12px 18px;max-width:1080px;margin:0 auto;width:max-content;min-width:100%}
+.snav button{font-size:11px;letter-spacing:.12em;white-space:nowrap;color:var(--gris);padding:2px 0;border-bottom:1px solid transparent}
+.snav button.act{color:var(--negro);border-bottom-color:var(--edicion)}
+
+/* ── hero ── */
+.hero{display:grid;gap:22px;padding:28px 0 34px}
+.hero__cover img{width:100%;display:block;box-shadow:0 14px 40px rgba(19,17,16,.2)}
+.hero h2{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(32px,10vw,60px);
+  line-height:.98;letter-spacing:-.02em;margin:0}
+.hero__rule{width:52px;height:1px;background:var(--negro);margin:18px 0}
+.hero p.sub{font-family:"Bodoni Moda",Georgia,serif;font-size:clamp(15px,4.4vw,19px);line-height:1.5;color:var(--gris);margin:0}
+.cta{display:inline-block;border:1px solid var(--edicion);color:var(--edicion);padding:13px 20px;
+  font-size:11.5px;letter-spacing:.14em;margin-top:22px;transition:background .18s,color .18s}
+.cta:hover{background:var(--edicion);color:#fff}
+.quote{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-size:clamp(16px,4.6vw,21px);
+  line-height:1.4;margin:30px 0 0;color:var(--negro)}
+.sign{font-size:9.5px;letter-spacing:.16em;color:var(--gris);margin:14px 0 0;line-height:1.8}
+.signrow{display:flex;align-items:center;gap:14px;margin-top:16px}
+.signrow img{width:64px;height:64px;border-radius:50%;object-fit:cover;display:block;flex:0 0 auto}
+.sign b{display:block;font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-weight:400;
+  font-size:19px;letter-spacing:0;color:var(--negro);margin-bottom:6px}
+
+/* ── paneles ── */
+.panels{display:grid;gap:14px;padding-bottom:36px}
+.panel{position:relative;aspect-ratio:4/3;border:1px solid var(--borde);
+  background-image:repeating-linear-gradient(135deg,rgba(19,17,16,.045) 0 1px,transparent 1px 10px);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.panel h3{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(22px,6vw,30px);
+  line-height:1;margin:0;letter-spacing:-.01em}
+.panel p{font-family:"Bodoni Moda",Georgia,serif;font-size:13px;color:var(--gris);margin:7px 0 0}
+.panel .ph{position:absolute;top:14px;left:18px;font-size:8px;letter-spacing:.1em;color:var(--gris2)}
+
+/* ── ediciones ── */
+.band{border-top:1px solid var(--borde);padding:30px 0}
+.band__h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.band__h h3{font-size:15px;letter-spacing:.16em;margin:0;font-weight:600}
+.band__h span{margin-left:auto;font-size:10px;letter-spacing:.12em;color:var(--gris)}
+.eds{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.ed{border:1px solid var(--borde);background:var(--papel);display:flex;flex-direction:column}
+.ed__art{aspect-ratio:2/3;background:var(--marfil);overflow:hidden;position:relative}
+.ed__art img{width:100%;height:100%;object-fit:cover;display:block}
+.ed__art.soon{background-image:repeating-linear-gradient(135deg,rgba(19,17,16,.05) 0 1px,transparent 1px 10px);
+  display:grid;place-items:center}
+.ed__art.soon span{font-size:9px;letter-spacing:.14em;color:var(--gris2)}
+.ed__in{padding:12px 12px 0;flex:1}
+.ed__n{font-size:9.5px;letter-spacing:.16em;color:var(--gris);margin:0}
+.ed__t{font-family:"Bodoni Moda",Georgia,serif;font-size:16px;line-height:1.15;margin:5px 0 0}
+.ed__d{font-size:9px;letter-spacing:.14em;color:var(--gris2);margin:7px 0 0}
+.ed__b{margin:12px;padding:11px;text-align:center;font-size:10.5px;letter-spacing:.14em;
+  background:var(--negro);color:#fff}
+.ed__b[disabled]{background:none;border:1px solid var(--borde);color:var(--gris2);cursor:default}
+.propuesta{grid-column:1/-1;border:1px solid var(--borde);padding:22px;display:flex;flex-direction:column;justify-content:center;
+  text-align:center;background:var(--papel)}
+.propuesta h4{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:22px;line-height:1.15;margin:0}
+.propuesta p{font-size:13px;color:var(--gris);line-height:1.55;margin:10px 0 18px}
+
+/* ── newsletter y pie ── */
+.news{background:var(--negro);color:#fff;text-align:center;padding:38px 20px}
+.news h3{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-weight:400;
+  font-size:clamp(24px,7vw,34px);margin:0}
+.news p{font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.7);margin:12px 0 22px}
+.news .subnote{font-size:12.5px;line-height:1.6;letter-spacing:0;color:rgba(255,255,255,.82);margin:14px auto 0;max-width:420px;min-height:1em}
+.subbtn{display:inline-block;background:var(--edicion);color:#fff;text-decoration:none;padding:15px 30px;font-size:11.5px;letter-spacing:.16em}
+.subbtn:hover{background:#fff;color:var(--edicion)}
+.news form{display:flex;gap:1px;max-width:420px;margin:0 auto}
+.news input{flex:1;min-width:0;border:0;padding:13px 14px;font:inherit;font-size:13px;background:#fff;color:var(--negro)}
+.news button{background:var(--edicion);color:#fff;padding:13px 18px;font-size:10.5px;letter-spacing:.14em}
+.foot{padding:26px 0 40px;border-top:1px solid var(--borde);margin-top:0}
+.foot__l button{font:inherit;letter-spacing:inherit;color:inherit;padding:4px 0;border-bottom:1px solid transparent}
+.foot__l button:hover{color:var(--negro);border-bottom-color:var(--edicion)}
+.info{padding-top:26px;padding-bottom:45vh;max-width:640px}
+.info__s{border-top:1px solid var(--borde);padding:30px 0 34px;scroll-margin-top:calc(var(--bar) + 12px + env(safe-area-inset-top,0px))}
+.info__s:first-child{border-top:0;padding-top:6px}
+.info__s h2{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(26px,7.5vw,38px);line-height:1.05;letter-spacing:-.02em;margin:0 0 16px}
+.info__s p{font-size:15px;line-height:1.7;margin:0 0 14px}
+.info__q{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-size:18px!important;color:var(--edicion)}
+.info__disc{font-size:13px!important;color:var(--gris);line-height:1.9!important}
+.info__btns{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.info .cta{text-decoration:none;display:inline-block}
+.info__s>.cta{margin-top:8px}
+.cta--line{border-color:var(--negro);color:var(--negro)}
+.cta--line:hover{background:var(--negro);color:#fff}
+.tm{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--borde)}
+.tm img,.tm__i{width:58px;height:58px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.tm__i{display:grid;place-items:center;background:var(--papel);border:1px solid var(--borde);font-family:"Bodoni Moda",Georgia,serif;font-size:18px;color:var(--gris)}
+.tm__n{font-family:"Bodoni Moda",Georgia,serif;font-size:19px!important;margin:0!important;line-height:1.2!important}
+.tm__r{font-size:11px!important;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin:4px 0 0!important}
+.info__back{font-size:11px;letter-spacing:.14em;color:var(--gris);margin-top:10px;padding:10px 0}
+.foot__l{display:flex;flex-wrap:wrap;gap:18px;font-size:10.5px;letter-spacing:.12em;color:var(--gris);margin-bottom:18px}
+.ig{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.06em;color:var(--negro);text-decoration:none;border-bottom:1px solid var(--edicion);padding-bottom:3px;margin-bottom:18px}
+.ig svg{width:15px;height:15px}
+.foot__c{font-size:10px;color:var(--gris2)}
+
+/* ── lector ── */
+#view-flip{display:none;place-items:center;height:calc(100dvh - var(--bar) - var(--barb) - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));padding:10px;overflow:hidden}
+#view-flip.on{display:grid}
+#stage{display:contents}
+#zoom{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:7px;
+  transform-origin:center center;touch-action:none;will-change:transform}
+body[data-spread="1"] #view-flip .page{inline-size:min(calc((100% - 7px)/2),calc(var(--fit) * 2 / 3))}
+.zb{font-size:11px;letter-spacing:.06em;border:1px solid var(--borde);padding:7px 9px;flex:0 0 auto;
+  font-variant-numeric:tabular-nums;min-width:40px;text-align:center}
+@media (orientation:landscape){:root{--bar:44px;--barb:54px}
+  .brand{padding:20px 0 14px}}
+#view-scroll.on{display:block;padding:16px 14px 44px}
+#view-index.on{display:block;padding:24px 18px 60px}
+.botbar{position:fixed;bottom:0;left:0;right:0;z-index:25;background:rgba(243,239,232,.96);backdrop-filter:blur(12px);
+  border-top:1px solid var(--borde);padding-bottom:env(safe-area-inset-bottom,0px);display:none}
+body[data-mode="flip"] .botbar{display:block}
+.botbar__in{height:var(--barb);display:flex;align-items:center;gap:12px;padding:0 16px;max-width:1080px;margin:0 auto}
+.step{width:32px;height:32px;display:grid;place-items:center;font-size:19px;flex:0 0 auto}
+.step:disabled{opacity:.25}
+.scrub{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.folio{font-size:10.5px;color:var(--gris);text-align:center;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.folio em{color:var(--negro);font-style:normal;font-weight:600}
+input[type=range]{width:100%;margin:0;accent-color:var(--edicion);height:16px}
+.edsw{display:flex;align-items:center;justify-content:center;gap:16px;padding:9px 0 0;border-bottom:1px solid var(--borde);
+  font-size:10px;letter-spacing:.14em;color:var(--gris)}
+.edsw button{padding:2px 8px;font-size:14px;line-height:1}
+.edsw button:disabled{opacity:.25}
+
+/* ── página ── */
+.page{position:relative;aspect-ratio:2/3;background:var(--papel);color:var(--negro);
+  box-shadow:0 10px 28px rgba(19,17,16,.14);overflow:hidden;display:flex;flex-direction:column;
+  inline-size:min(100%,520px);container-type:inline-size;margin:0 auto}
+#view-flip .page{margin:0;block-size:100%;inline-size:auto;max-inline-size:100%;
+  --fit:calc(100dvh - var(--bar) - var(--barb) - 20px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
+  inline-size:min(100%,calc(var(--fit) * 2 / 3));block-size:auto;max-block-size:100%}
+#view-scroll .page{margin-bottom:18px}
+.page__body{flex:1;display:flex;flex-direction:column;gap:9px;padding:8.5% 9.5% 3.5%;min-height:0;overflow:hidden}
+.page__foot{display:flex;align-items:baseline;gap:9px;padding:0 9.5% 5.5%;font-size:8.5px;letter-spacing:.09em;color:var(--gris2)}
+.page[data-side="r"] .page__foot{flex-direction:row-reverse}
+.page__num{font-weight:600;color:var(--negro);font-variant-numeric:tabular-nums;font-size:10px;letter-spacing:0}
+.page__sec{flex:1}
+.page[data-side="r"] .page__sec{text-align:right}
+.rh{font-size:7.5px;letter-spacing:.14em;color:var(--gris2);margin:0;flex:0 0 auto}
+.art__t{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(15px,5.2cqw,27px);
+  line-height:1.02;letter-spacing:-.02em;margin:2px 0 0}
+.art__s{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-size:clamp(8.5px,2.6cqw,13px);
+  color:var(--gris);margin:6px 0 0;line-height:1.4}
+.slot{position:relative;border:1px solid var(--borde);padding:8px 9px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow:hidden}
+.slot--grow{flex:1}
+.tag{font-size:8px;font-weight:500;letter-spacing:.05em;color:var(--gris);line-height:1.35}
+.spec{font-size:7.5px;color:var(--gris2);margin-top:auto;letter-spacing:.03em}
+.lines{flex:1;min-height:12px;background:repeating-linear-gradient(to bottom,rgba(19,17,16,.2) 0 1px,transparent 1px 8px)}
+.bi{display:flex;gap:8px;flex:1;min-height:0}
+.bi>div{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0}
+.bi span{font-size:7.5px;font-weight:600;letter-spacing:.08em;color:var(--gris2)}
+.slot--img{border-style:dashed;background-image:repeating-linear-gradient(135deg,rgba(19,17,16,.05) 0 1px,transparent 1px 9px);justify-content:flex-end}
+.cols{display:flex;gap:9px;flex:1;min-height:0}
+.cols>.slot{flex:1}
+.grid4{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:7px;flex:1;min-height:0}
+.pquote{font-family:"Bodoni Moda",Georgia,serif;font-size:clamp(11px,3.5cqw,17px);line-height:1.35;margin:0}
+.pquote em{font-style:italic;color:var(--gris)}
+.mini{font-size:8px;line-height:1.65;color:var(--gris);margin:0}
+.rule{height:1px;background:var(--borde);flex:0 0 auto}
+.bt.bt--carta{font-size:clamp(5.6px,2.6cqw,11.5px);line-height:1.6;text-align:left}
+.stf{border-bottom:1px solid var(--borde);padding:6px 0}
+.stf__n{font-family:"Bodoni Moda",Georgia,serif;font-size:clamp(9px,3.1cqw,15px);line-height:1.1;margin:0}
+.stf__r{font-size:clamp(6px,2cqw,9px);letter-spacing:.07em;color:var(--gris);margin:3px 0 0}
+.bt{font-size:clamp(4.8px,2.1cqw,9.6px);line-height:1.55;margin:0;text-align:justify;hyphens:auto;color:var(--negro)}
+.blab{font-size:7px;font-weight:600;letter-spacing:.09em;color:var(--gris2);margin:0 0 5px}
+.bres{font-size:clamp(6px,2cqw,9px);line-height:1.5;color:var(--gris);margin:0 0 6px}
+.otitle{font-family:"Bodoni Moda",Georgia,serif;font-weight:900;font-size:clamp(18px,6.6cqw,36px);
+  line-height:.94;letter-spacing:-.025em;margin:0}
+.oen{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-size:clamp(9px,2.6cqw,14px);color:var(--gris);margin:5px 0 0}
+.oidea{font-size:8.5px;line-height:1.6;color:var(--gris);margin:9px 0 0}
+.otoc{font-size:8.5px;line-height:1.85;color:var(--negro);margin:0;padding:0;list-style:none}
+.otoc li{border-top:1px solid var(--borde);padding:4px 0}
+.plate{flex:1;display:grid;place-items:center;text-align:center;gap:7px;border:1px dashed var(--borde);padding:14px}
+.plate h3{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(13px,4.4cqw,22px);margin:0}
+.plate p{font-size:8px;color:var(--gris);margin:0;line-height:1.6;letter-spacing:.03em}
+.title{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;font-size:clamp(13px,4.2cqw,21px);margin:0}
+.page--cover{padding:0}
+.page--cover img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ── índice ── */
+.idx{max-width:780px;margin:0 auto}
+.idx__k{font-size:10px;letter-spacing:.18em;color:var(--edicion);margin:0 0 12px}
+.idx h2{font-family:"Bodoni Moda",Georgia,serif;font-weight:900;font-size:clamp(30px,9.5vw,54px);
+  line-height:.94;letter-spacing:-.03em;margin:0 0 16px}
+.stats{display:flex;flex-wrap:wrap;gap:26px;margin:28px 0 6px;padding-top:20px;border-top:1px solid var(--borde)}
+.stat b{display:block;font-family:"Bodoni Moda",Georgia,serif;font-size:26px;font-weight:400;line-height:1}
+.stat small{font-size:10px;letter-spacing:.09em;color:var(--gris)}
+.run{border-top:1px solid var(--borde);padding:20px 0}
+.run:first-of-type{margin-top:26px}
+.run__h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.run__h strong{font-size:15px;font-weight:600}
+.run__h em{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-size:13px;color:var(--gris)}
+.run__h .range{margin-left:auto;font-size:11px;color:var(--gris);font-variant-numeric:tabular-nums;white-space:nowrap}
+.run__a{font-size:12px;color:var(--gris);line-height:1.7;margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{inline-size:29px;block-size:29px;font-size:10px;font-variant-numeric:tabular-nums;border:1px solid var(--borde);
+  color:var(--negro);background:var(--papel);text-align:center}
+.chip--ad{border-style:dotted;color:var(--gris2);background:none}
+.chip--open{background:var(--edicion);border-color:var(--edicion);color:#fff;font-weight:600}
+.legend{border-top:1px solid var(--borde);margin-top:24px;padding-top:16px;font-size:11px;color:var(--gris);line-height:1.8}
+
+/* ── próximamente ── */
+.soonv{text-align:center;padding:70px 20px 90px;max-width:440px;margin:0 auto}
+.soonv h2{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(30px,9vw,48px);margin:0 0 10px;line-height:1}
+.soonv p{font-size:13px;color:var(--gris);line-height:1.7;margin:0}
+.soonv .d{font-size:10px;letter-spacing:.2em;color:var(--edicion);margin:0 0 18px}
+
+@media (min-width:760px){
+  .hero{grid-template-columns:1fr 1.05fr 1fr;align-items:center;gap:30px}
+  .hero__cover{order:2}
+  .hero__txt{order:1}
+  .panels{order:3;grid-template-rows:1fr 1fr;padding-bottom:0}
+  .eds{grid-template-columns:repeat(4,1fr)}
+  .propuesta{grid-column:span 4}
+}
+@media (prefers-reduced-motion:no-preference){
+  #stage>.page{animation:fi .2s ease}
+  @keyframes fi{from{opacity:0}to{opacity:1}}
+}
+</style>
+</head>
+<body data-mode="home" data-lang="es">
+
+<header class="top">
+  <div class="top__in">
+    <button class="logo" id="tohome">Color<i>In</i>Chic</button>
+    <div class="top__sp">
+      <button class="lang" id="lang"><b>ES</b> / EN</button>
+      <button class="burger" id="burger">MENÚ</button>
+    </div>
+  </div>
+</header>
+
+<div id="menu"></div>
+
+<main>
+  <section id="view-home" class="view on"></section>
+  <section id="view-ediciones" class="view"></section>
+  <section id="view-flip" class="view"><div id="zoom"><div id="stage"></div></div></section>
+  <section id="view-scroll" class="view"></section>
+  <section id="view-index" class="view"></section>
+  <section id="view-soon" class="view"></section>
+  <section id="view-info" class="view"></section>
+</main>
+
+<footer class="botbar">
+  <div class="botbar__in">
+    <button class="step" id="prev" aria-label="Anterior">‹</button>
+    <div class="scrub">
+      <div class="folio"><em id="cur">1</em> / 140 · <span id="curSec"></span></div>
+      <input type="range" id="range" min="1" max="140" value="1" aria-label="Ir a la página">
+    </div>
+    <button class="step" id="next" aria-label="Siguiente">›</button>
+    <button class="zb" id="zoomb" aria-label="Zoom">1×</button>
+  </div>
+</footer>
+
+<script>
+const SEC = {"servicio":{"es":"Servicio","en":"Front and back matter","idea_es":"","idea_en":"","arts":[]},"publicidad":{"es":"Publicidad","en":"Advertising","idea_es":"","idea_en":"","arts":[]},"moda":{"es":"Moda","en":"Fashion","idea_es":"Moda de autor, editoriales, diseñadores, tendencias y moda como lenguaje artístico.","idea_en":"Designer fashion, editorials, trends and fashion as an artistic language.","arts":[{"t_es":"El color como segunda piel","t_en":"Colour as a Second Skin","s_es":"Diseñadores que usan el color como declaración y no como adorno.","s_en":"Designers who treat colour as a statement rather than an ornament.","b_es":"Hay diseñadores que tratan el color como el último paso: eligen la forma, resuelven el corte y al final deciden el tono. Otros empiezan por ahí. Para ellos el color no viste la prenda, la construye. Define el volumen, marca la distancia a la que el cuerpo se lee y decide qué parte de quien la lleva entra primero en la mirada de los demás.","b_en":"Some designers treat colour as the last step: they choose the shape, settle the cut and pick the tone at the end. Others begin there. For them colour does not dress the garment, it builds it. It defines volume, sets the distance at which a body reads, and decides which part of the wearer enters other people's field of vision first."},{"t_es":"Sastrería del trópico","t_en":"Tropical Tailoring","s_es":"Volumen, humedad y luz: cómo se corta la ropa cerca del ecuador.","s_en":"Volume, humidity and light: how clothes are cut near the equator.","b_es":"Cortar ropa cerca de la línea ecuatorial resuelve un problema distinto al europeo. No hay estaciones que marquen el ritmo, hay humedad constante y una luz vertical que no perdona ningún acabado. El resultado es una sastrería que trabaja con el aire: holgura donde otros ajustan, tejidos que se separan de la piel, colores que no se apagan bajo el sol del mediodía.","b_en":"Cutting clothes near the equator solves a different problem from the European one. There are no seasons to set the rhythm, only constant humidity and a vertical light that forgives no finish. The result is a tailoring that works with air: ease where others fit close, fabrics held away from the skin, colours that do not fade under midday sun."},{"t_es":"Un vestido, cinco miradas","t_en":"One Dress, Five Gazes","s_es":"La misma prenda fotografiada por cinco autores distintos.","s_en":"The same garment photographed by five different authors.","b_es":"Entregamos la misma prenda a cinco fotógrafos sin decirles nada más. Ninguno preguntó por la marca. Volvieron con un objeto de museo, una escena doméstica, un cuerpo casi ausente, una textura ampliada hasta lo abstracto y un retrato que ignoraba el vestido por completo. La prenda fue la misma; lo que cambió fue el acuerdo entre quien mira y quien es mirado.","b_en":"We handed the same garment to five photographers and said nothing else. None of them asked about the label. They came back with a museum object, a domestic scene, an almost absent body, a texture enlarged into abstraction, and a portrait that ignored the dress entirely. The garment stayed the same; what changed was the agreement between the one who looks and the one who is looked at."}]},"belleza":{"es":"Belleza","en":"Beauty","idea_es":"Belleza editorial, innovación, rituales, perfume, maquillaje y estética.","idea_en":"Editorial beauty, innovation, rituals, perfume, make-up and aesthetics.","arts":[{"t_es":"Pigmento y memoria","t_en":"Pigment and Memory","s_es":"Lo que el maquillaje hereda de la pintura.","s_en":"What make-up inherits from painting.","b_es":"El maquillaje aprendió a mezclar antes de que la pintura tuviera academias. Los mismos óxidos, las mismas tierras, la misma lógica de capas: base, sombra, luz. Lo que cambia es el soporte, que aquí respira, se mueve y envejece. Mirar un rostro maquillado como se mira un cuadro explica por qué ciertos gestos se repiten durante siglos y otros duran una temporada.","b_en":"Make-up learned to mix long before painting had academies. The same oxides, the same earths, the same logic of layers: base, shadow, light. What changes is the support, which here breathes, moves and ages. Looking at a made-up face the way one looks at a painting explains why certain gestures repeat for centuries and others last a season."},{"t_es":"Rituales de agua","t_en":"Water Rituals","s_es":"Cuidado del cuerpo en climas donde el agua lo decide todo.","s_en":"Body care in climates where water decides everything.","b_es":"En los climas donde llueve mucho y hace calor todo el año, el cuidado del cuerpo no gira alrededor de la crema sino del agua: cuántas veces al día, a qué temperatura, con qué se corta la humedad después. Los productos llegaron mucho más tarde que la costumbre, y casi siempre se adaptaron a ella en vez de imponerse.","b_en":"In climates where it rains hard and stays warm all year, body care revolves not around cream but around water: how often a day, at what temperature, and what cuts the dampness afterwards. Products arrived long after the habit, and almost always adapted to it rather than imposing themselves."}]},"arte":{"es":"Arte","en":"Art","idea_es":"Artes visuales, pintura, escultura, instalación, performance, arte digital, nuevos medios y arte público.","idea_en":"Visual arts, painting, sculpture, installation, performance, digital art, new media and public art.","arts":[{"t_es":"Salir del taller","t_en":"Leaving the Studio","s_es":"De adentro para afuera y de fuera para adentro.","s_en":"From the inside out and from the outside in.","reserved":true,"b_es":"","b_en":""},{"t_es":"Vestigio","t_en":"Vestigio","s_es":"Memoria, huella y territorio.","s_en":"Memory, trace and territory.","reserved":true,"b_es":"","b_en":""},{"t_es":"Máscara","t_en":"Máscara","s_es":"Identidad prehispánica y el rostro que se presta.","s_en":"Pre-Hispanic identity and the borrowed face.","reserved":true,"b_es":"","b_en":""}]},"fotografia":{"es":"Fotografía","en":"Photography","idea_es":"Fotografía artística, moda, documental, autores y ensayos fotográficos.","idea_en":"Art, fashion and documentary photography, authors and photographic essays.","arts":[{"t_es":"Ensayo sobre la luz","t_en":"An Essay on Light","s_es":"Un cuerpo de trabajo construido alrededor de una sola hora del día.","s_en":"A body of work built around a single hour of the day.","b_es":"Trabajar una sola hora del día durante meses obliga a renunciar a casi todo. No hay variedad de escenas ni de personajes: hay una luz que llega, dura poco y se va. Lo que se acumula no son imágenes distintas, sino diferencias mínimas entre imágenes parecidas, y ahí aparece el tema verdadero, que rara vez es la luz misma.","b_en":"Working a single hour of the day for months means giving up almost everything. There is no variety of scenes or characters: there is a light that arrives, lasts briefly and leaves. What accumulates is not different images but minimal differences between similar ones, and that is where the real subject appears, which is rarely the light itself."},{"t_es":"Retrato y consentimiento","t_en":"Portrait and Consent","s_es":"Quién mira, quién es mirado y quién decide.","s_en":"Who looks, who is looked at, and who decides.","b_es":"Toda fotografía de una persona es un acuerdo, aunque no se firme. Quién propone el encuadre, quién puede detener la sesión, quién decide qué imagen se publica y quién conserva el archivo después. Cuando ese acuerdo no se hace explícito, no desaparece: simplemente lo escribe quien tiene la cámara.","b_en":"Every photograph of a person is an agreement, even when nothing is signed. Who proposes the frame, who can stop the session, who decides which image is published and who keeps the archive afterwards. When the agreement is not made explicit it does not disappear: it is simply written by whoever holds the camera."},{"t_es":"Acuse de recibo / Mientras tanto","t_en":"Acuse de recibo / Mientras tanto","s_es":"Archivo de lo cotidiano y sus coincidencias. Cuatro dípticos.","s_en":"An archive of the everyday and its coincidences. Four diptychs.","reserved":true,"b_es":"","b_en":""}]},"cultura":{"es":"Cultura","en":"Culture","idea_es":"Cine, literatura, música, teatro, patrimonio y nuevas escenas culturales.","idea_en":"Cinema, literature, music, theatre, heritage and new cultural scenes.","arts":[{"t_es":"Escenas que nacen fuera del centro","t_en":"Scenes Born Off-Centre","s_es":"Música, teatro y literatura desde ciudades que no son capital.","s_en":"Music, theatre and literature from cities that are not capitals.","b_es":"Las escenas que crecen lejos de la capital no son versiones pequeñas de lo que pasa en el centro. Tienen otro público, otros locales, otras economías y, sobre todo, otra relación con la permanencia: casi nadie vive de esto a tiempo completo, y esa precariedad decide qué se hace, cuándo y durante cuánto tiempo.","b_en":"Scenes that grow far from the capital are not small versions of what happens at the centre. They have another audience, other venues, other economies and, above all, another relationship with permanence: almost nobody does this full time, and that precariousness decides what gets made, when, and for how long."},{"t_es":"Patrimonio en disputa","t_en":"Heritage in Dispute","s_es":"Qué se conserva, quién lo decide y qué se pierde.","s_en":"What is preserved, who decides, and what is lost.","b_es":"Conservar siempre es elegir. Cada edificio restaurado implica otro que no lo fue, cada relato oficial deja fuera una versión. La pregunta interesante no es qué merece conservarse, sino quién está en la sala cuando esa decisión se toma y a quién se le informa después.","b_en":"To preserve is always to choose. Every restored building implies another that was not, every official account leaves a version out. The interesting question is not what deserves preserving, but who is in the room when that decision is made and who gets told afterwards."}]},"newvoices":{"es":"Nuevas Voces","en":"New Voices","idea_es":"Plataforma de descubrimiento de artistas, fotógrafos, diseñadores, escritores, cineastas y creadores emergentes.","idea_en":"A discovery platform for emerging artists, photographers, designers, writers and filmmakers.","arts":[]},"inspiracion":{"es":"Inspiración","en":"Inspiration","idea_es":"Historias extraordinarias, conversaciones y perfiles de personas creativas.","idea_en":"Extraordinary stories, conversations and profiles of creative people.","arts":[{"t_es":"Empezar tarde","t_en":"Starting Late","s_es":"Quienes encontraron su oficio después de los cuarenta.","s_en":"Those who found their craft after forty.","b_es":"Empezar a los cuarenta o a los sesenta cambia menos de lo que se cree en la obra y mucho en el relato. Quien llega tarde no tiene años de formación acumulados, pero tampoco arrastra la ansiedad de la promesa joven. Trabaja con lo que ya sabe de otras vidas, y eso suele notarse.","b_en":"Starting at forty or at sixty changes less than expected in the work and a great deal in the story told about it. Those who arrive late have no accumulated years of training, but neither do they carry the anxiety of the young promise. They work with what they already know from other lives, and it usually shows."},{"t_es":"Conversación en el taller","t_en":"A Conversation in the Studio","s_es":"Una visita larga y sin prisa al lugar donde se trabaja.","s_en":"A long, unhurried visit to the place where the work happens.","b_es":"Una visita larga al taller se parece poco a una entrevista. Hay silencios, hay trabajo que continúa mientras se habla, hay objetos que explican más que las respuestas. Lo que se busca no es una declaración sino el orden real de las cosas: qué está a mano, qué se guardó y qué lleva meses sin tocarse.","b_en":"A long studio visit has little in common with an interview. There are silences, work that carries on while you talk, objects that explain more than the answers do. What you are after is not a statement but the real order of things: what is within reach, what was put away, and what has gone untouched for months."}]},"negocio":{"es":"Emprendimiento Creativo","en":"Creative Business","idea_es":"Mercado del arte, marcas creativas, gestión cultural, innovación y economía creativa.","idea_en":"The art market, creative brands, cultural management, innovation and the creative economy.","arts":[{"t_es":"Vivir del arte","t_en":"Making a Living from Art","s_es":"Precios, galerías, comisiones y los números que nadie publica.","s_en":"Prices, galleries, commissions and the numbers nobody publishes.","b_es":"Los números del arte circulan poco. Qué porcentaje se queda la galería, cuánto tarda un pago, cuánto cuesta producir una pieza que después se vende a un precio que parece alto. Publicar esas cifras no abarata el trabajo: permite que quien empieza sepa a qué está entrando.","b_en":"Art's numbers rarely circulate. What percentage the gallery keeps, how long a payment takes, what it costs to produce a piece that later sells at a price that looks high. Publishing those figures does not cheapen the work: it lets those starting out know what they are getting into."},{"t_es":"Marca de autor","t_en":"The Author as a Brand","s_es":"Cuando el nombre del creador se convierte en empresa.","s_en":"When the creator's name becomes a company.","b_es":"Cuando el nombre propio se vuelve marca, aparece una tensión difícil de administrar: la obra necesita cambiar y la marca necesita reconocerse. Algunos resuelven separando líneas, otros dejando que el cambio sea la marca misma. Ninguna de las dos salidas es gratuita.","b_en":"When a personal name becomes a brand, a tension appears that is hard to manage: the work needs to change and the brand needs to be recognisable. Some resolve it by separating lines, others by letting change itself become the brand. Neither way out comes free."}]},"lifestyle":{"es":"Estilo de Vida","en":"Lifestyle","idea_es":"Diseño, arquitectura, interiores, bienestar y formas contemporáneas de vivir.","idea_en":"Design, architecture, interiors, wellbeing and contemporary ways of living.","arts":[{"t_es":"Casas que respiran","t_en":"Houses That Breathe","s_es":"Arquitectura pensada para el calor, la lluvia y la luz directa.","s_en":"Architecture designed for heat, rain and direct light.","b_es":"Una casa pensada para el calor no se enfría: se ventila. Aleros largos, celosías, patios que sacan el aire caliente hacia arriba, materiales que no acumulan temperatura. Son soluciones antiguas, baratas y casi siempre más eficaces que el aire acondicionado que se instala encima de ellas.","b_en":"A house designed for heat is not cooled: it is ventilated. Long eaves, lattices, courtyards that pull hot air upward, materials that do not store temperature. These are old, inexpensive solutions, and almost always more effective than the air conditioning later installed on top of them."},{"t_es":"El objeto cotidiano","t_en":"The Everyday Object","s_es":"Diseño que no se exhibe: se usa todos los días.","s_en":"Design that is not exhibited: it is used every day.","b_es":"Los objetos que usamos todos los días rara vez se exhiben y casi nunca se firman. Una jarra, un banco, una canasta. Su diseño se corrige con el uso durante generaciones hasta que ya no se puede quitar nada, que es exactamente lo que el diseño de autor intenta alcanzar por otros medios.","b_en":"The objects we use every day are rarely exhibited and almost never signed. A jug, a stool, a basket. Their design is corrected by use across generations until nothing more can be removed, which is exactly what authored design tries to reach by other means."}]},"atlas":{"es":"Atlas Chic","en":"Chic Atlas","idea_es":"Viajes vistos desde el arte, la arquitectura, la moda, la gastronomía y la cultura local.","idea_en":"Travel seen through art, architecture, fashion, food and local culture.","arts":[{"t_es":"La ciudad en cuatro capas","t_en":"The City in Four Layers","s_es":"Formato Guía ColorInChic: arte, arquitectura, moda y mesa.","s_en":"ColorInChic Guide format: art, architecture, fashion and the table.","b_es":"Una ciudad se puede leer por capas, y cada capa cuenta una historia distinta. La arquitectura dice qué se pudo pagar y cuándo. El arte dice qué se permitió mostrar. La moda dice cómo se quiere ser visto. La mesa dice de dónde viene la gente. Las cuatro juntas explican más que cualquier guía ordenada por barrios.","b_en":"A city can be read in layers, and each layer tells a different story. Architecture says what could be paid for, and when. Art says what was allowed to be shown. Fashion says how people want to be seen. The table says where they came from. The four together explain more than any guide arranged by neighbourhood."},{"t_es":"48 horas de arte","t_en":"48 Hours of Art","s_es":"Un recorrido corto, denso y posible.","s_en":"A short, dense, doable itinerary.","b_es":"Dos días bastan si se renuncia a la idea de verlo todo. Tres lugares por día, caminando, con tiempo para sentarse. Lo que sobra no es la lista de museos sino la ansiedad de tacharlos. Un itinerario corto y denso deja recuerdos más precisos que una semana dispersa.","b_en":"Two days are enough if you give up the idea of seeing everything. Three places a day, on foot, with time to sit down. What is expendable is not the list of museums but the anxiety of ticking them off. A short, dense itinerary leaves sharper memories than a scattered week."},{"t_es":"Territorio y color","t_en":"Territory and Colour","s_es":"Cómo el paisaje decide la paleta de un lugar.","s_en":"How landscape decides a place's palette.","b_es":"La paleta de un lugar no se elige: se hereda del suelo, de la piedra disponible, del pigmento que se podía conseguir sin traerlo de lejos. Cuando un color parece típico de una ciudad, casi siempre es porque durante siglos fue el más barato.","b_en":"A place's palette is not chosen: it is inherited from the soil, from the stone at hand, from the pigment that could be obtained without bringing it from far away. When a colour looks typical of a city, it is almost always because for centuries it was the cheapest."}]},"gastronomia":{"es":"Gastronomía","en":"Gastronomy","idea_es":"Gastronomía como cultura, diseño, territorio y experiencia sensorial.","idea_en":"Food as culture, design, territory and sensory experience.","arts":[{"t_es":"La mesa como territorio","t_en":"The Table as Territory","s_es":"Cocina que se entiende leyendo el mapa.","s_en":"Cooking you understand by reading the map.","b_es":"Hay cocinas que solo se entienden con un mapa al lado. Qué crece a esa altura, qué llega del puerto, qué se conserva porque no había forma de mantenerlo fresco. El plato es el resultado de una geografía antes que de una receta, y por eso viaja mal cuando se reproduce fuera de su territorio.","b_en":"Some cuisines only make sense with a map beside them. What grows at that altitude, what arrives from the port, what is preserved because there was no way to keep it fresh. The dish results from a geography before it results from a recipe, which is why it travels badly when reproduced away from its territory."},{"t_es":"Del cacao a la vitrina","t_en":"From Cacao to the Display Case","s_es":"Un producto que atraviesa economía, cultura y diseño.","s_en":"A product that crosses economy, culture and design.","b_es":"El cacao atraviesa toda la cadena: agricultura, exportación, industria, diseño de empaque y, últimamente, sala de exposición. Cada eslabón se queda con una parte del valor y cuenta una versión distinta del mismo producto. Seguir esa ruta completa dice más sobre una economía que cualquier cifra de exportación.","b_en":"Cacao runs the whole chain: agriculture, export, industry, packaging design and, lately, the exhibition room. Each link keeps a share of the value and tells a different version of the same product. Following that whole route says more about an economy than any export figure."}]},"colormes":{"es":"Color del Mes","en":"Colour of the Month","idea_es":"Una investigación visual y cultural alrededor de un color.","idea_en":"A visual and cultural investigation around a single colour.","arts":[{"t_es":"Anatomía de un color","t_en":"Anatomy of a Colour","s_es":"Origen, historia, usos y significados de un solo tono.","s_en":"Origin, history, uses and meanings of a single hue.","b_es":"Un color tiene historia material antes que simbólica. De dónde se extraía, cuánto costaba, quién podía usarlo y qué leyes lo prohibían. El significado llega después, casi siempre como consecuencia del precio. Por eso la anatomía de un tono empieza en la mina o en la planta, no en el diccionario.","b_en":"A colour has a material history before a symbolic one. Where it was extracted, what it cost, who was allowed to wear it and which laws forbade it. Meaning arrives later, almost always as a consequence of price. That is why the anatomy of a hue begins in the mine or the plant, not in the dictionary."},{"t_es":"El mismo color en cinco culturas","t_en":"The Same Colour in Five Cultures","s_es":"Lo que un tono significa según dónde se mire.","s_en":"What a hue means depending on where you stand.","b_es":"El mismo tono puede ser luto en un sitio y celebración a mil kilómetros. No es que uno de los dos se equivoque: es que el color no significa por sí mismo, significa dentro de un sistema. Cambiado el sistema, cambia todo, incluso la sensación física de mirarlo.","b_en":"The same hue can mean mourning in one place and celebration a thousand kilometres away. It is not that one of them is mistaken: colour does not mean on its own, it means inside a system. Change the system and everything changes, including the physical sensation of looking at it."}]},"chicedit":{"es":"The Chic Edit","en":"The Chic Edit","idea_es":"Selección curatorial de objetos, exposiciones, libros, diseño, moda y experiencias.","idea_en":"A curated selection of objects, exhibitions, books, design, fashion and experiences.","arts":[{"t_es":"Qué usar, qué coleccionar, dónde ir","t_en":"What to Wear, What to Collect, Where to Go","s_es":"La selección de la edición, en objetos.","s_en":"This issue's selection, in objects.","b_es":"La selección de la edición no busca novedad sino permanencia. Objetos que seguirán sirviendo en diez años, exposiciones que valen el viaje, prendas que no dependen de una temporada. Se eligen de a uno y se justifican de a uno.","b_en":"This issue's selection is not after novelty but permanence. Objects that will still serve in ten years, exhibitions worth the trip, garments that do not depend on a season. They are chosen one at a time and justified one at a time."},{"t_es":"Libros, objetos, exposiciones","t_en":"Books, Objects, Exhibitions","s_es":"Lo que vale la pena leer, tener y visitar.","s_en":"What is worth reading, owning and visiting.","b_es":"Libros que no se agotan en una lectura, objetos que mejoran con el uso, exposiciones que cambian algo después de verlas. La lista es corta a propósito: recomendar mucho equivale a no recomendar nada.","b_en":"Books that are not used up in one reading, objects that improve with use, exhibitions that change something once seen. The list is deliberately short: recommending a great deal amounts to recommending nothing."}]},"opencall":{"es":"Convocatoria Abierta","en":"Open Call","idea_es":"Cada edición lanza una convocatoria vinculada a su concepto cromático.","idea_en":"Each issue launches an open call tied to its chromatic concept.","arts":[]},"patron":{"es":"Círculo de Mecenas","en":"The Patron Circle","idea_es":"Un círculo internacional de apoyo a la creación.","idea_en":"An international circle supporting creation.","arts":[]}};
+const PLAN = [["servicio","portada",-1],["publicidad","ad",-1],["servicio","sumario",-1],["servicio","sumario",-1],["publicidad","ad",-1],["publicidad","ad",-1],["servicio","carta",-1],["servicio","staff",-1],["moda","opener",-1],["moda","t0",0],["moda","t1",0],["publicidad","ad",-1],["moda","t2",0],["moda","t3",1],["moda","t0",1],["publicidad","ad",-1],["moda","t1",1],["moda","t4",2],["moda","t0",2],["publicidad","ad",-1],["belleza","opener",-1],["belleza","t0",0],["belleza","t1",0],["publicidad","ad",-1],["belleza","t2",0],["belleza","t0",1],["belleza","t3",1],["publicidad","ad",-1],["arte","opener",-1],["arte","t0",0],["arte","t1",0],["publicidad","ad",-1],["arte","t2",0],["arte","t3",1],["arte","t0",1],["publicidad","ad",-1],["arte","t1",1],["arte","t4",2],["arte","t0",2],["publicidad","ad",-1],["fotografia","opener",-1],["fotografia","t0",0],["fotografia","t1",0],["publicidad","ad",-1],["fotografia","t2",0],["fotografia","t3",1],["fotografia","t0",1],["publicidad","ad",-1],["fotografia","t1",1],["fotografia","t4",2],["fotografia","t0",2],["publicidad","ad",-1],["cultura","opener",-1],["cultura","t0",0],["cultura","t1",0],["publicidad","ad",-1],["cultura","t2",0],["cultura","t0",1],["cultura","t3",1],["publicidad","ad",-1],["newvoices","opener",-1],["newvoices","nv1",-1],["newvoices","nv2",-1],["publicidad","ad",-1],["newvoices","nv2",-1],["newvoices","t3",-1],["newvoices","nv3",-1],["publicidad","ad",-1],["inspiracion","opener",-1],["inspiracion","t0",0],["inspiracion","t1",0],["publicidad","ad",-1],["inspiracion","t2",0],["inspiracion","t0",1],["inspiracion","t3",1],["publicidad","ad",-1],["negocio","opener",-1],["negocio","t0",0],["negocio","t1",0],["publicidad","ad",-1],["negocio","t2",0],["negocio","t0",1],["negocio","t3",1],["publicidad","ad",-1],["lifestyle","opener",-1],["lifestyle","t0",0],["lifestyle","t1",0],["publicidad","ad",-1],["lifestyle","t2",0],["lifestyle","t0",1],["lifestyle","t3",1],["publicidad","ad",-1],["atlas","opener",-1],["atlas","t0",0],["atlas","t1",0],["publicidad","ad",-1],["atlas","t2",0],["atlas","t3",1],["atlas","t0",1],["publicidad","ad",-1],["atlas","atl",1],["atlas","t4",2],["atlas","t0",2],["publicidad","ad",-1],["gastronomia","opener",-1],["gastronomia","t0",0],["gastronomia","t1",0],["publicidad","ad",-1],["gastronomia","t2",0],["gastronomia","t0",1],["gastronomia","t3",1],["publicidad","ad",-1],["colormes","opener",-1],["colormes","cdm",0],["colormes","t0",0],["publicidad","ad",-1],["colormes","t2",0],["colormes","t4",1],["colormes","t0",1],["publicidad","ad",-1],["chicedit","opener",-1],["chicedit","t0",0],["chicedit","t4",0],["publicidad","ad",-1],["chicedit","t2",0],["chicedit","t0",1],["chicedit","t3",1],["publicidad","ad",-1],["opencall","opener",-1],["opencall","oc1",-1],["opencall","oc2",-1],["publicidad","ad",-1],["patron","opener",-1],["patron","pc1",-1],["patron","pc2",-1],["publicidad","ad",-1],["servicio","creditos",-1],["publicidad","ad",-1],["publicidad","ad",-1],["publicidad","contra",-1]];
+const COVER = "img/portada-edicion-01.jpg";
+const LAMURE = "img/lamure.jpg";
+const MORA = "img/mora.jpg";
+const ADS = {
+  2:{src:LAMURE,alt:"Lamuré — jabones artesanales"},
+  12:{src:MORA,alt:"Morá Art & Design — arte con identidad",pos:"15% center"},
+  24:{src:LAMURE,alt:"Lamuré — jabones artesanales"},
+  28:{src:LAMURE,alt:"Lamuré — jabones artesanales"},
+  108:{src:LAMURE,alt:"Lamuré — jabones artesanales"},
+  138:{src:LAMURE,alt:"Lamuré — jabones artesanales"}
+};
+const EDS = [
+  {n:1, t_es:"Revolución Cromática", t_en:"Chromatic Revolution", d_es:"OCT 2026", d_en:"OCT 2026", live:true},
+  {n:2, t_es:"Próximamente",         t_en:"Coming soon",  d_es:"ENE 2027", d_en:"JAN 2027", live:false},
+  {n:3, t_es:"Próximamente",         t_en:"Coming soon",  d_es:"ABR 2027", d_en:"APR 2027", live:false},
+  {n:4, t_es:"Próximamente",         t_en:"Coming soon",  d_es:"JUL 2027", d_en:"JUL 2027", live:false}
+];
+const CARTA={es:`Hubo un tiempo en que estuve a punto de renunciar.<br><br>Trabajaba en un consultorio, en una habitación sin ventanas. Solo una claraboya, pequeña y alta, dejaba entrar la luz. Los días pasaban sin color en un oficio que no me pertenecía, y por esa abertura yo dejaba volar la imaginación. Mientras soñaba, escribía: relatos cortos, poemas que no mostraba a nadie.<br><br>Lo más difícil no fue el encierro, sino empezar a darles la razón a las voces que me criticaban. Esa es la renuncia verdadera, y ocurre en silencio.<br><br>No renuncié. El arte me salvó.<br><br>Hoy sé que el camino del creador no lo define quien lo hace mejor, sino quien insiste. La creatividad no se enseña: se despierta experimentando, equivocándose y volviendo al taller al día siguiente.<br><br>ColorInChic nace de esa convicción: mostrar a quienes insistieron e inspirar a quien todavía mira hacia su propia claraboya.<br><br>Nunca es tarde para atreverte a ser lo que viniste a ser.<br><br>El arte sana. El arte salva.`,en:`There was a time when I came close to giving up.<br><br>I worked in a consulting room with no windows. A single skylight, small and set high, let in the light. The days went by without colour in a trade that was not mine, and through that opening I let my imagination fly. While I dreamed, I wrote: short stories, poems I showed to no one.<br><br>The hardest part was not the confinement, but beginning to agree with the voices that criticised me. That is the real surrender, and it happens in silence.<br><br>I did not give up. Art saved me.<br><br>Today I know that a creative path is not defined by whoever does it best, but by whoever persists. Creativity is not taught: it is awakened by experimenting, by getting things wrong and returning to the studio the next day.<br><br>ColorInChic is born of that conviction: to show those who persisted and to inspire whoever is still looking up at their own skylight.<br><br>It is never too late to dare to be what you came here to be.<br><br>Art heals. Art saves.`};
+const IGICON=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>`;
+const QR = "img/qr.png";
+const CATH_SQ = "img/catherine.jpg";
+const FORM="https://tally.so/r/rjXbZL";
+const IG={url:"https://www.instagram.com/colorinchic_ec",h:"@colorinchic_ec"};
+const STAFF = [
+  {n:"Catherine Mora Ortiz", r_es:"Fundadora y Directora General", r_en:"Founder and Editor-in-Chief"},
+  {n:"Viviana Mora Ortiz",   r_es:"Moda, Fashion Stylist y Diseño", r_en:"Fashion, Styling and Design"},
+  {n:"Pamela Suárez Narváez",r_es:"Arte y Cultura", r_en:"Art and Culture"}
+];
+const ORDER = ["moda","belleza","arte","fotografia","cultura","newvoices","inspiracion","negocio","lifestyle","atlas","gastronomia","colormes","chicedit","opencall","patron"];
+
+const T = {
+  es:{inicio:"INICIO",ediciones:"EDICIONES",secciones:"SECCIONES",nav:"NAVEGACIÓN",lectura:"LECTURA",pasar:"Pasar página",
+      scroll:"Scroll continuo",indice:"Índice de la edición",menu:"MENÚ",cerrar:"CERRAR",
+      kw:"ARTE · MODA · CULTURA · ESTILO",tag:"El color como lenguaje. La creatividad como cultura.",
+      meta:"REVISTA DIGITAL TRIMESTRAL<br>DESDE ECUADOR PARA EL MUNDO",
+      hero:"EL ARTE DE UN MUNDO MÁS COLORIDO",
+      sub:"Historias que inspiran. Talento que transforma. Cultura que nos conecta.",
+      cta:"EXPLORA LA EDICIÓN 01",
+      quote:"“La creatividad también es una forma de libertad.”",
+      rol:"FUNDADORA Y DIRECTORA GENERAL",
+      p1:"ECUADOR NOW",p1s:"Territorios que inspiran",p2:"ARTE VIVO",p2s:"Tradición que crece",
+      ultimas:"ÚLTIMAS EDICIONES",cadencia:"4 EDICIONES AL AÑO · UN MUNDO DE HISTORIAS",
+      leer:"LEER EDICIÓN",pronto:"MUY PRONTO",
+      prop:"SÉ PARTE DE LA PRÓXIMA EDICIÓN",
+      props:"Artistas, creativos, marcas y proyectos con propósito.",
+      propb:"ENVÍA TU PROPUESTA",subok:"Se abrirá tu correo con la solicitud lista. Solo tienes que enviarla.",subbad:"Revisa tu correo electrónico, parece incompleto.",subalt:"¿No se abrió? Escríbenos a",
+      news:"Inspira. Conecta. Transforma.",newss:"SUSCRÍBETE Y RECIBE CADA EDICIÓN EN TU CORREO",
+      mail:"Tu correo electrónico",sub2:"SUSCRIBIRME",
+      foot:["ACERCA DE","EQUIPO","PUBLICA","PATROCINA","CONTACTO"],
+      cr:"© 2026 ColorInChic. Todos los derechos reservados.",
+      pags:"PÁGINAS",edit:"EDITORIAL",publi:"PUBLICIDAD",total:"DEL TOTAL",
+      idxl:"Cada casilla abre la página en el lector. Casilla llena: apertura de sección. Casilla punteada: espacio publicitario.",
+      edicion:"EDICIÓN",soon:"Esta edición aún no está publicada.",imagen:"IMAGEN POR CARGAR"},
+  en:{inicio:"HOME",ediciones:"ISSUES",secciones:"SECTIONS",nav:"NAVIGATION",lectura:"READING",pasar:"Page by page",
+      scroll:"Continuous scroll",indice:"Issue contents",menu:"MENU",cerrar:"CLOSE",
+      kw:"ART · FASHION · CULTURE · STYLE",tag:"Color as a language. Creativity as a culture.",
+      meta:"QUARTERLY DIGITAL MAGAZINE<br>FROM ECUADOR TO THE WORLD",
+      hero:"THE ART OF A MORE COLOURFUL WORLD",
+      sub:"Stories that inspire. Talent that transforms. Culture that connects us.",
+      cta:"EXPLORE ISSUE 01",
+      quote:"“Creativity is also a form of freedom.”",
+      rol:"FOUNDER AND EDITOR-IN-CHIEF",
+      p1:"ECUADOR NOW",p1s:"Territories that inspire",p2:"ARTE VIVO",p2s:"Tradition that grows",
+      ultimas:"LATEST ISSUES",cadencia:"4 ISSUES A YEAR · A WORLD OF STORIES",
+      leer:"READ ISSUE",pronto:"COMING SOON",
+      prop:"BE PART OF THE NEXT ISSUE",
+      props:"Artists, creatives, brands and projects with purpose.",
+      propb:"SEND YOUR PROPOSAL",subok:"Your email app will open with the request ready. Just send it.",subbad:"Please check your email address, it looks incomplete.",subalt:"Didn't open? Write to us at",
+      news:"Inspire. Connect. Transform.",newss:"SUBSCRIBE AND RECEIVE EVERY ISSUE BY EMAIL",
+      mail:"Your email address",sub2:"SUBSCRIBE",
+      foot:["ABOUT","TEAM","PUBLISH","SPONSOR","CONTACT"],
+      cr:"© 2026 ColorInChic. All rights reserved.",
+      pags:"PAGES",edit:"EDITORIAL",publi:"ADVERTISING",total:"OF TOTAL",
+      idxl:"Each cell opens that page in the reader. Solid cell: section opener. Dotted cell: advertising space.",
+      edicion:"ISSUE",soon:"This issue has not been published yet.",imagen:"IMAGE TO BE ADDED"}
+};
+
+const body=document.body;
+let L="es", mode="home", page=1, ed=1;
+const t=k=>T[L][k];
+const sn=k=>SEC[k][L];
+const idea=k=>SEC[k]["idea_"+L];
+
+/* ─────────── páginas ─────────── */
+const img=(a,b)=>`<div class="slot slot--img slot--grow"><div class="tag">${a}</div><div class="spec">${b}</div></div>`;
+const imgS=(a,b)=>`<div class="slot slot--img" style="flex:1.3"><div class="tag">${a}</div><div class="spec">${b}</div></div>`;
+const txt=a=>`<div class="slot slot--grow"><div class="tag">${a}</div><div class="bi"><div><span>ES</span><div class="lines"></div></div><div><span>EN</span><div class="lines"></div></div></div></div>`;
+const band=(a,h)=>`<div class="slot" style="flex:0 0 auto"><div class="tag">${a}</div><div class="lines" style="flex:0 0 ${h}px"></div></div>`;
+const LB={es:{pie:"Pie de foto",cuerpo:"Cuerpo del texto",gal:"Galería · 4 imágenes",img:"Imagen",
+              imgc:"Imagen a página completa",dest:"Destacado",pies:"Pies de foto",sub:"Subtítulo"},
+          en:{pie:"Caption",cuerpo:"Body text",gal:"Gallery · 4 images",img:"Image",
+              imgc:"Full-page image",dest:"Pull quote",pies:"Captions",sub:"Standfirst"}};
+
+function bodyCols(A){
+  const l=LB[L];
+  if(A&&A.reserved) return `<div class="slot slot--grow" style="border-style:dashed"><div class="tag">${L==="es"?"Texto de la autora · pendiente de insertar":"Author's text · to be inserted"}</div><div class="bi"><div><span>ES</span><div class="lines"></div></div><div><span>EN</span><div class="lines"></div></div></div></div>`;
+  if(A&&A.b_es) return `<div class="cols"><div class="slot"><p class="blab">ES</p><p class="bt">${A.b_es}</p></div><div class="slot"><p class="blab">EN</p><p class="bt">${A.b_en}</p></div></div>`;
+  return `<div class="cols"><div class="slot"><div class="tag">${l.cuerpo} · ES</div><div class="lines"></div></div><div class="slot"><div class="tag">${l.cuerpo} · EN</div><div class="lines"></div></div></div>`;
+}
+function bodyOne(A){
+  const l=LB[L];
+  if(A&&A.reserved) return `<div class="slot slot--grow" style="border-style:dashed"><div class="tag">${L==="es"?"Texto de la autora · pendiente de insertar":"Author's text · to be inserted"}</div><div class="lines"></div></div>`;
+  if(A&&A["b_"+L]) return `<div class="slot slot--grow"><p class="bt">${A["b_"+L]}</p></div>`;
+  return `<div class="slot slot--grow"><div class="tag">${l.cuerpo}</div><div class="bi"><div><span>ES</span><div class="lines"></div></div><div><span>EN</span><div class="lines"></div></div></div></div>`;
+}
+function tpl(kind,sec,art,first,n){
+  const S=SEC[sec], l=LB[L];
+  const A=art>=0&&S.arts[art]?S.arts[art]:null;
+  const headArt = A ? (first
+      ? `<div style="flex:0 0 auto"><div class="rule" style="margin-bottom:8px"></div><h3 class="art__t">${A["t_"+L]}</h3><p class="art__s">${A["s_"+L]}</p></div>`
+      : `<p class="rh">${A["t_"+L].toUpperCase()}</p>`) : "";
+  switch(kind){
+    case "portada": return {cover:true};
+    case "sumario": return `<div class="page__body"><h3 class="title">${L==="es"?"Sumario":"Contents"}</h3><div class="rule"></div>${ORDER.map(k=>`<div style="display:flex;gap:8px;font-size:8.5px;border-top:1px solid var(--borde);padding:3px 0"><span style="flex:1">${sn(k)}</span><span style="color:var(--gris2)">${openerOf(k)}</span></div>`).join("")}</div>`;
+    case "carta": return `<div class="page__body"><h3 class="title">${L==="es"?"Carta editorial":"Editor's letter"}</h3><div class="rule"></div><p class="pquote" style="flex:0 0 auto;font-size:clamp(10px,3.1cqw,15px)">${t("quote")}</p><div class="slot slot--grow" style="border:0;padding:0"><p class="bt bt--carta">${CARTA[L]}</p></div><div style="flex:0 0 auto;display:flex;align-items:center;gap:10px;padding-top:6px;border-top:1px solid var(--borde)"><img src="${CATH_SQ}" alt="Catherine Mora Ortiz" style="width:17%;aspect-ratio:1;border-radius:50%;object-fit:cover;display:block"><div><p class="stf__n" style="font-style:italic">Catherine Mora Ortiz</p><p class="stf__r">${t("rol")}</p></div></div></div>`;
+    case "staff": return `<div class="page__body"><h3 class="title">Staff</h3><div class="rule"></div><div style="flex:0 0 auto">${STAFF.map(p=>`<div class="stf"><p class="stf__n">${p.n}</p><p class="stf__r">${p["r_"+L]}</p></div>`).join("")}</div><div class="slot slot--grow" style="border-style:dashed"><div class="tag">${L==="es"?"Fotografía · Traducción · Colaboradores de esta edición":"Photography · Translation · Contributors to this issue"}</div><div class="lines"></div></div><div style="flex:0 0 auto;display:flex;align-items:center;gap:10px;border-top:1px solid var(--borde);padding-top:8px"><img src="${QR}" alt="QR Instagram ${IG.h}" style="width:24%;aspect-ratio:1;display:block;border-radius:8%"><div><p class="tag" style="margin:0">${L==="es"?"Síguenos en Instagram":"Follow us on Instagram"}</p><a href="${IG.url}" target="_blank" rel="noopener" class="stf__n" style="color:var(--edicion);text-decoration:none;display:block;margin-top:3px">${IG.h}</a></div></div></div>`;
+    case "creditos": return `<div class="page__body"><h3 class="title">${L==="es"?"Créditos":"Credits"}</h3><div class="rule"></div>${txt(L==="es"?"Créditos por pieza · autoría de imágenes":"Credits per piece · image authorship")}${band(L==="es"?"Próxima edición":"Next issue",14)}</div>`;
+    case "ad": return ADS[n] ? Object.assign({cover:true},ADS[n]) : `<div class="page__body"><div class="plate"><h3>${L==="es"?"Publicidad":"Advertising"}</h3><p>${L==="es"?"ESPACIO DISPONIBLE":"SPACE AVAILABLE"} · 1200 × 1800 PX</p></div></div>`;
+    case "contra": return `<div class="page__body"><div class="plate"><h3>${L==="es"?"Contraportada":"Back cover"}</h3><p>1200 × 1800 PX</p></div></div>`;
+    case "opener": return `<div class="page__body"><div style="flex:0 0 auto"><div class="rule" style="margin-bottom:12px"></div><h2 class="otitle">${sn(sec)}</h2><p class="oen">${L==="es"?SEC[sec].en:SEC[sec].es}</p><p class="oidea">${idea(sec)}</p></div>${S.arts.length?`<ul class="otoc">${S.arts.map(a=>`<li>${a["t_"+L]}</li>`).join("")}</ul>`:""}${img(l.img,"2:3")}</div>`;
+    case "t0": return `<div class="page__body">${headArt}${img(l.img,"2:3")}</div>`;
+    case "t1": return `<div class="page__body">${headArt}${img(l.imgc,"2:3 · 1200 × 1800 PX")}${band(l.pie,10)}</div>`;
+    case "t2": return `<div class="page__body">${headArt}${bodyCols(A)}${band(l.dest,12)}</div>`;
+    case "t3": return `<div class="page__body">${headArt}${imgS(l.img,"4:5")}${bodyOne(A)}</div>`;
+    case "t4": return `<div class="page__body">${headArt}<div class="grid4"><div class="slot slot--img"><div class="tag">1</div></div><div class="slot slot--img"><div class="tag">2</div></div><div class="slot slot--img"><div class="tag">3</div></div><div class="slot slot--img"><div class="tag">4</div></div></div>${band(l.pies,10)}</div>`;
+    case "nv1": return `<div class="page__body"><div class="rule"></div><h3 class="art__t">${L==="es"?"Creador destacado":"Featured creator"}</h3><p class="art__s">${L==="es"?"Un creador por edición.":"One creator per issue."}</p>${imgS(L==="es"?"Retrato u obra":"Portrait or work","4:5")}${band(L==="es"?"Nombre · disciplina · país":"Name · discipline · country",10)}${band(l.cuerpo,18)}</div>`;
+    case "nv2": return `<div class="page__body"><p class="rh">${L==="es"?"PORTFOLIOS SELECCIONADOS":"SELECTED PORTFOLIOS"}</p><div class="grid4"><div class="slot slot--img"><div class="tag">1</div></div><div class="slot slot--img"><div class="tag">2</div></div><div class="slot slot--img"><div class="tag">3</div></div><div class="slot slot--img"><div class="tag">4</div></div></div>${band(L==="es"?"Nombre · disciplina · país":"Name · discipline · country",10)}</div>`;
+    case "nv3": return `<div class="page__body"><p class="pquote">${L==="es"?"El talento necesita ser visto.<br><em>Talent needs to be seen.</em>":"Talent needs to be seen.<br><em>El talento necesita ser visto.</em>"}</p><div class="rule"></div>${band(L==="es"?"Cómo postular":"How to apply",16)}${band(L==="es"?"Plazos y requisitos":"Deadlines and requirements",16)}${img(l.img,"2:3")}</div>`;
+    case "oc1": return `<div class="page__body"><div class="rule"></div><h3 class="art__t">Submit your work</h3><p class="art__s">Envía tu obra</p><p class="mini" style="line-height:2">Pintura · Escultura · Fotografía · Performance · Videoarte · Arte digital · IA creativa · Diseño · Moda · Ilustración · Escritura · Instalación · Arte sonoro · Nuevos medios</p>${img(l.img,"2:3")}</div>`;
+    case "oc2": return `<div class="page__body"><h3 class="title">${L==="es"?"Bases de la convocatoria":"Open call terms"}</h3><div class="rule"></div>${band(L==="es"?"Tema vinculado al concepto cromático":"Theme tied to the chromatic concept",14)}${band(L==="es"?"Quién puede participar":"Who can take part",14)}${band(L==="es"?"Qué enviar y en qué formato":"What to send and in what format",14)}${band(L==="es"?"Plazos y resultados":"Deadlines and results",14)}${band(L==="es"?"Derechos sobre las obras · POR DEFINIR":"Rights over submitted work · TO BE DEFINED",14)}</div>`;
+    case "pc1": return `<div class="page__body"><p class="pquote">${L==="es"?"El talento necesita ser visto.<br>La creación necesita ser sostenida.":"Talent needs to be seen.<br>Creation needs to be sustained."}</p><div class="rule"></div>${band(L==="es"?"Ediciones, convocatorias, proyectos editoriales, artistas":"Issues, open calls, editorial projects, artists",18)}${img(l.img,"2:3")}</div>`;
+    case "pc2": return `<div class="page__body"><h3 class="title">${L==="es"?"Transparencia":"Transparency"}</h3><div class="rule"></div>${band(L==="es"?"Qué se financia":"What is funded",13)}${band(L==="es"?"Cuánto se ha conseguido":"How much has been raised",13)}${band(L==="es"?"Qué proyecto recibió el apoyo":"Which project received support",13)}<div class="slot" style="flex:0 0 auto"><div class="tag">${L==="es"?"Aviso legal · por definir":"Legal notice · to be defined"}</div><p class="mini" style="margin-top:4px">${L==="es"?"Donación, patrocinio comercial y apoyo directo a artistas se presentan por separado. Sin promesa de deducciones fiscales.":"Donation, commercial sponsorship and direct support to artists are presented separately. No tax deduction is promised."}</p></div></div>`;
+    case "cdm": return `<div class="page__body"><div class="rule"></div><h3 class="art__t">${L==="es"?"El color de la edición":"The colour of the issue"}</h3><div class="slot" style="flex:0 0 auto"><div class="tag">HEX ${L==="es"?"por definir":"to be defined"}</div><div style="height:24px;margin-top:6px;background:var(--edicion)"></div></div>${band(L==="es"?"Origen, historia y usos":"Origin, history and uses",16)}${img(l.img,"2:3")}</div>`;
+    case "atl": return `<div class="page__body"><p class="rh">${L==="es"?"GUÍA COLORINCHIC":"COLORINCHIC GUIDE"}</p>${band(L==="es"?"Arte y arquitectura":"Art and architecture",12)}${band(L==="es"?"Moda y diseño":"Fashion and design",12)}${band(L==="es"?"Gastronomía":"Food",12)}${band(L==="es"?"Cultura local":"Local culture",12)}${imgS(L==="es"?"Mapa o imagen":"Map or image","4:5")}</div>`;
+  }
+}
+const openerOf=k=>PLAN.findIndex(p=>p[0]===k&&p[1]==="opener")+1;
+function fitText(root){
+  if(!root) return;
+  root.querySelectorAll(".bt").forEach(p=>{
+    const box=p.parentElement; if(!box) return;
+    box.style.overflowY=""; box.style.touchAction="";
+    p.style.fontSize="";
+    const base=parseFloat(getComputedStyle(p).fontSize)||10;
+    const pb=parseFloat(getComputedStyle(box).paddingBottom)||0;
+    const over=()=>p.scrollHeight>(box.clientHeight-p.offsetTop-pb)+1;
+    let s=1,g=0;
+    while(over() && s>0.3 && g++<40){ s-=0.035; p.style.fontSize=(base*s)+"px"; }
+    if(over()){ box.style.overflowY="auto"; box.style.touchAction="pan-y"; }
+  });
+}
+function refit(){
+  fitText(document.getElementById("view-flip"));
+  if(scrollBuilt) fitText(document.getElementById("view-scroll"));
+}
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>setTimeout(refit,60));
+addEventListener("resize",()=>{clearTimeout(window.__rf);window.__rf=setTimeout(refit,180);});
+addEventListener("load",()=>setTimeout(refit,120));
+function firstOfArt(n){
+  const [sec,,art]=PLAN[n-1];
+  if(art<0) return false;
+  const prev=PLAN[n-2];
+  return !prev || prev[0]!==sec || prev[2]!==art;
+}
+function pageHTML(n){
+  const [sec,kind,art]=PLAN[n-1];
+  const side=n%2?"r":"l";
+  const t=tpl(kind,sec,art,firstOfArt(n),n);
+  if(t&&t.cover) return `<article class="page page--cover" data-side="${side}"><img src="${t.src||COVER}" alt="${t.alt||"ColorInChic"}"${t.pos?` style="object-position:${t.pos}"`:""}></article>`;
+  const lab=kind==="portada"?(L==="es"?"Portada":"Cover"):(kind==="contra"?(L==="es"?"Contraportada":"Back cover"):sn(sec));
+  return `<article class="page" data-side="${side}">${t}<div class="page__foot"><span class="page__num">${n}</span><span class="page__sec">${lab}</span></div></article>`;
+}
+
+/* ─────────── vistas ─────────── */
+function renderHome(){
+  const E=EDS;
+  document.getElementById("view-home").innerHTML=`
+  <div class="wrap"><div class="brand">
+    <h1>ColorInChic</h1>
+    <p class="kw">${t("kw")}</p>
+    <p class="tag">${t("tag")}</p>
+    <p class="meta">${t("meta")}</p>
+  </div></div>
+  <div class="snav"><div class="snav__in">
+    <button class="act" data-nav="home">${t("inicio")}</button>
+    <button data-nav="ediciones">${t("ediciones")}</button>
+    ${ORDER.map(k=>`<button data-sec="${k}">${sn(k).toUpperCase()}</button>`).join("")}
+  </div></div>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero__txt">
+        <h2>${t("hero")}</h2><div class="hero__rule"></div>
+        <p class="sub">${t("sub")}</p>
+        <button class="cta" data-go="1">${t("cta")} →</button>
+        <p class="quote">${t("quote")}</p>
+        <div class="signrow"><img src="${CATH_SQ}" alt="Catherine Mora Ortiz"><p class="sign" style="margin:0"><b>Catherine Mora Ortiz</b>${t("rol")}</p></div>
+      </div>
+      <div class="hero__cover"><img src="${COVER}" alt="ColorInChic"></div>
+      <div class="panels">
+        <div class="panel"><span class="ph">${t("imagen")}</span><h3>${t("p1")}</h3><p>${t("p1s")}</p></div>
+        <div class="panel"><span class="ph">${t("imagen")}</span><h3>${t("p2")}</h3><p>${t("p2s")}</p></div>
+      </div>
+    </div>
+    <section class="band">
+      <div class="band__h"><h3>${t("ultimas")}</h3><span>${t("cadencia")}</span></div>
+      <div class="eds">
+        ${E.map(e=>edCard(e)).join("")}
+        <div class="propuesta"><h4>${t("prop")}</h4><p>${t("props")}</p><a class="cta" style="margin:0 auto;text-decoration:none" href="${FORM}" target="_blank" rel="noopener">${t("propb")} →</a></div>
+      </div>
+    </section>
+  </div>
+  <div class="news">
+    <h3>${t("news")}</h3><p>${t("newss")}</p>
+    <a class="subbtn" href="${FORM}" target="_blank" rel="noopener">${t("sub2")} →</a>
+  </div>
+  <div class="wrap"><div class="foot">
+    <a class="ig" href="${IG.url}" target="_blank" rel="noopener">${IGICON}${IG.h}</a>
+    <div class="foot__l">${t("foot").map((f,i)=>`<button data-info="${INFO_KEYS[i]}">${f}</button>`).join("")}</div>
+    <p class="foot__c">${t("cr")}</p>
+  </div></div>`;
+}
+function edCard(e){
+  const art = e.live ? `<div class="ed__art"><img src="${COVER}" alt=""></div>`
+                     : `<div class="ed__art soon"><span>${t("pronto")}</span></div>`;
+  return `<div class="ed">${art}<div class="ed__in">
+    <p class="ed__n">${t("edicion")} 0${e.n}</p>
+    <p class="ed__t">${e["t_"+L]}</p>
+    <p class="ed__d">${e["d_"+L]}</p></div>
+    <button class="ed__b" ${e.live?`data-ed="${e.n}"`:"disabled"}>${e.live?t("leer"):t("pronto")}</button></div>`;
+}
+function renderEdiciones(){
+  document.getElementById("view-ediciones").innerHTML=`<div class="wrap"><section class="band" style="border:0">
+    <div class="band__h"><h3>${t("ediciones")}</h3><span>${t("cadencia")}</span></div>
+    <div class="eds">${EDS.map(e=>edCard(e)).join("")}</div></section></div>`;
+}
+function renderSoon(e){
+  document.getElementById("view-soon").innerHTML=`<div class="soonv">
+    <p class="d">${t("edicion")} 0${e.n} · ${e["d_"+L]}</p>
+    <h2>${e["t_"+L]}</h2><p>${t("soon")}</p></div>`;
+}
+function renderIndex(){
+  const ads=PLAN.filter(p=>p[0]==="publicidad").length;
+  const own=PLAN.map(p=>p[0]);
+  for(let k=0;k<140;k++) if(own[k]==="publicidad"){
+    let a=k-1; while(a>=0&&own[a]==="publicidad")a--;
+    if(a>=0) own[k]=own[a];
+    else{let b=k+1;while(b<140&&PLAN[b][0]==="publicidad")b++;if(b<140)own[k]=PLAN[b][0];}
+  }
+  let h=`<div class="idx"><p class="idx__k">${t("edicion")} 01 — ${EDS[0]["t_"+L].toUpperCase()}</p>
+    <h2>${EDS[0]["t_"+L]}</h2>
+    <div class="stats">
+      <div class="stat"><b>140</b><small>${t("pags")}</small></div>
+      <div class="stat"><b>${140-ads}</b><small>${t("edit")}</small></div>
+      <div class="stat"><b>${ads}</b><small>${t("publi")}</small></div>
+      <div class="stat"><b>${Math.round(ads/140*100)}%</b><small>${t("total")}</small></div>
+    </div>`;
+  let i=0;
+  while(i<140){
+    const s=own[i]; let j=i; while(j<140&&own[j]===s)j++;
+    const arts=SEC[s].arts;
+    h+=`<section class="run"><div class="run__h"><strong>${sn(s)}</strong><em>${L==="es"?SEC[s].en:SEC[s].es}</em><span class="range">pp. ${i+1}–${j}</span></div>`;
+    if(arts&&arts.length) h+=`<p class="run__a">${arts.map(a=>a["t_"+L]).join(" · ")}</p>`;
+    h+=`<div class="chips">`;
+    for(let k=i;k<j;k++){
+      const kd=PLAN[k][1];
+      const c=(kd==="ad"||kd==="contra")?"chip chip--ad":(kd==="opener"?"chip chip--open":"chip");
+      h+=`<button class="${c}" data-go="${k+1}">${k+1}</button>`;
+    }
+    h+=`</div></section>`; i=j;
+  }
+  h+=`<div class="legend">${t("idxl")}</div></div>`;
+  document.getElementById("view-index").innerHTML=h;
+}
+function renderMenu(){
+  document.getElementById("menu").innerHTML=`
+  <div class="menu__grp"><p class="menu__lbl">${t("nav")}</p>
+    <button data-nav="home">${t("inicio")}</button>
+    <button data-nav="ediciones">${t("ediciones")}</button>
+  </div>
+  <div class="menu__grp"><p class="menu__lbl">${t("edicion")} 01</p>
+    ${ORDER.map(k=>`<button data-sec="${k}">${sn(k)}<em>${L==="es"?SEC[k].en:SEC[k].es}</em></button>`).join("")}
+  </div>
+  <div class="menu__grp"><p class="menu__lbl">${t("lectura")}</p>
+    <button data-nav="flip">${t("pasar")}</button>
+    <button data-nav="scroll">${t("scroll")}</button>
+    <button data-nav="index">${t("indice")}</button>
+  </div>
+  <div class="menu__grp"><a class="ig" href="${IG.url}" target="_blank" rel="noopener">${IGICON}${IG.h}</a></div>`;
+}
+function buildScroll(){
+  let h=""; for(let i=1;i<=140;i++) h+=pageHTML(i);
+  const sv=document.getElementById("view-scroll");
+  sv.innerHTML=h; scrollBuilt=true;
+  requestAnimationFrame(()=>fitText(sv));
+}
+
+/* ─────────── páginas del pie ─────────── */
+const INFO_KEYS=["acerca","equipo","publica","patrocina","contacto"];
+const INFO={
+ es:{
+  acerca:["Acerca de ColorInChic",
+   `<p>ColorInChic es una revista digital trimestral de arte, moda, cultura y estilo, hecha desde Ecuador para el mundo.</p>
+    <p>No solo muestra: descubre, conecta y activa oportunidades. Es a la vez publicación, escaparate para nuevos talentos y puente entre creadores, coleccionistas, marcas, instituciones y personas que quieren apoyar la creación.</p>
+    <p class="info__q">El color como lenguaje. La creatividad como cultura.</p>`],
+  equipo:["Equipo",""],
+  publica:["Publica en ColorInChic",
+   `<p>¿Eres artista, fotógrafo, diseñador, escritor o creador? Cada edición abre una convocatoria vinculada a su concepto cromático y selecciona portafolios para Nuevas Voces.</p>
+    <p class="info__disc">Pintura · Escultura · Fotografía · Performance · Videoarte · Arte digital · IA creativa · Diseño · Moda · Ilustración · Escritura · Instalación · Arte sonoro · Nuevos medios</p>
+    <a class="cta" href="${FORM}" target="_blank" rel="noopener">ENVÍA TU PROPUESTA →</a>`],
+  patrocina:["Patrocina",
+   `<p>Tu marca puede estar en ColorInChic con publicidad a página completa en la edición digital, o apoyando una edición, una convocatoria o a artistas emergentes a través del Círculo de Mecenas.</p>
+    <p>Escríbenos y conversamos.</p>
+    <div class="info__btns"><a class="cta" href="${FORM}" target="_blank" rel="noopener">QUIERO PATROCINAR →</a>
+    <button class="cta cta--line" data-go="133">CÍRCULO DE MECENAS</button></div>`],
+  contacto:["Contacto",
+   `<p>Para propuestas, patrocinios o cualquier consulta, escríbenos desde el formulario. También estamos en Instagram.</p>
+    <div class="info__btns"><a class="cta" href="${FORM}" target="_blank" rel="noopener">ESCRÍBENOS →</a>
+    <a class="ig" href="${IG.url}" target="_blank" rel="noopener">${IGICON}${IG.h}</a></div>`]
+ },
+ en:{
+  acerca:["About ColorInChic",
+   `<p>ColorInChic is a quarterly digital magazine of art, fashion, culture and style, made in Ecuador for the world.</p>
+    <p>It does not only show: it discovers, connects and activates opportunities. It is at once a publication, a showcase for new talent and a bridge between creators, collectors, brands, institutions and people who want to support creation.</p>
+    <p class="info__q">Color as a language. Creativity as a culture.</p>`],
+  equipo:["Team",""],
+  publica:["Publish in ColorInChic",
+   `<p>Are you an artist, photographer, designer, writer or creator? Each issue opens a call tied to its chromatic concept and selects portfolios for New Voices.</p>
+    <p class="info__disc">Painting · Sculpture · Photography · Performance · Video art · Digital art · Creative AI · Design · Fashion · Illustration · Writing · Installation · Sound art · New media</p>
+    <a class="cta" href="${FORM}" target="_blank" rel="noopener">SEND YOUR PROPOSAL →</a>`],
+  patrocina:["Sponsor",
+   `<p>Your brand can be in ColorInChic with full-page advertising in the digital issue, or by supporting an issue, an open call or emerging artists through The Patron Circle.</p>
+    <p>Write to us and let's talk.</p>
+    <div class="info__btns"><a class="cta" href="${FORM}" target="_blank" rel="noopener">I WANT TO SPONSOR →</a>
+    <button class="cta cta--line" data-go="133">THE PATRON CIRCLE</button></div>`],
+  contacto:["Contact",
+   `<p>For proposals, sponsorships or any enquiry, write to us through the form. We are also on Instagram.</p>
+    <div class="info__btns"><a class="cta" href="${FORM}" target="_blank" rel="noopener">WRITE TO US →</a>
+    <a class="ig" href="${IG.url}" target="_blank" rel="noopener">${IGICON}${IG.h}</a></div>`]
+ }
+};
+function renderInfo(){
+  const I=INFO[L];
+  const team=STAFF.map((p,i)=>`<div class="tm">${i===0?`<img src="${CATH_SQ}" alt="${p.n}">`:`<span class="tm__i">${p.n.split(" ").map(w=>w[0]).slice(0,2).join("")}</span>`}
+     <div><p class="tm__n">${p.n}</p><p class="tm__r">${p["r_"+L]}</p></div></div>`).join("");
+  document.getElementById("view-info").innerHTML=`<div class="wrap info">`+
+    INFO_KEYS.map(k=>`<section class="info__s" id="info-${k}"><h2>${I[k][0]}</h2>${k==="equipo"?team:I[k][1]}</section>`).join("")+
+    `<button class="info__back" data-nav="home">← ${L==="es"?"VOLVER A LA PORTADA":"BACK TO HOME"}</button></div>`;
+}
+function openInfo(k){
+  renderInfo(); setMode("info");
+  requestAnimationFrame(()=>{const el=document.getElementById("info-"+k); if(el) el.scrollIntoView({block:"start"});});
+}
+
+/* ─────────── control ─────────── */
+function setMode(m){
+  mode=m; body.dataset.mode=m; body.dataset.menu="0";
+  document.getElementById("burger").textContent=t("menu");
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="view-"+m));
+  if(m==="ediciones") renderEdiciones();
+  if(m==="index") renderIndex();
+  if(m==="scroll"){ if(!scrollBuilt) buildScroll(); }
+  if(m!=="scroll"&&m!=="index") scrollTo(0,0); else scrollTo(0,0);
+}
+let SPREAD=false, pair=[1], scrollBuilt=false;
+function pairOf(n){
+  if(!SPREAD||n===1||n===140) return [n];
+  const l=n%2===0?n:n-1;
+  return l===140?[140]:[l,l+1];
+}
+function show(n){
+  n=Math.min(140,Math.max(1,n));
+  pair=pairOf(n); page=pair[0];
+  const st=document.getElementById("stage");
+  st.innerHTML=pair.map(pageHTML).join("");
+  requestAnimationFrame(()=>{fitText(st.parentElement);setTimeout(()=>fitText(st.parentElement),260);});
+  document.getElementById("cur").textContent=pair.length>1?pair[0]+"–"+pair[1]:page;
+  document.getElementById("range").value=page;
+  const [s,k]=PLAN[page-1];
+  document.getElementById("curSec").textContent=k==="portada"?(L==="es"?"Portada":"Cover"):sn(s);
+  document.getElementById("prev").disabled=page===1;
+  document.getElementById("next").disabled=pair[pair.length-1]===140;
+  resetZoom();
+}
+const goNext=()=>show(pair[pair.length-1]+1);
+const goPrev=()=>show(pair[0]-1);
+
+/* ── zoom ── */
+const zoom=document.getElementById("zoom"), zbtn=document.getElementById("zoomb");
+let Z=1, tx=0, ty=0;
+function applyZoom(){
+  const r=zoom.getBoundingClientRect();
+  const mx=(Z-1)*r.width/2, my=(Z-1)*r.height/2;
+  tx=Math.max(-mx,Math.min(mx,tx)); ty=Math.max(-my,Math.min(my,ty));
+  zoom.style.transform=`translate(${tx}px,${ty}px) scale(${Z})`;
+  zbtn.textContent=(Math.round(Z*10)/10)+"×";
+}
+function setZoom(z,ox,oy){
+  const prev=Z; Z=Math.max(1,Math.min(4,z));
+  if(ox!==undefined){ const k=Z/prev; tx=(tx-ox)*k+ox; ty=(ty-oy)*k+oy; }
+  if(Z===1){tx=0;ty=0;}
+  applyZoom();
+}
+function resetZoom(){Z=1;tx=0;ty=0;zoom.style.transform="";zbtn.textContent="1×";}
+zbtn.onclick=()=>setZoom(Z>=3?1:(Z<1.6?2:3));
+function openSection(k){
+  const i=PLAN.findIndex(p=>p[0]===k&&p[1]==="opener");
+  if(i>=0){ show(i+1); setMode("flip"); }
+}
+function openEd(n){
+  ed=n; const e=EDS[n-1];
+  if(e.live){ show(1); setMode("flip"); } else { renderSoon(e); setMode("soon"); }
+}
+function setLang(l){
+  L=l; body.dataset.lang=l;
+  document.getElementById("lang").innerHTML = l==="es"?"<b>ES</b> / EN":"ES / <b>EN</b>";
+  renderHome(); renderMenu(); scrollBuilt=false;
+  if(mode==="ediciones") renderEdiciones();
+  if(mode==="index") renderIndex();
+  if(mode==="scroll") buildScroll();
+  if(mode==="soon") renderSoon(EDS[ed-1]);
+  if(mode==="info") renderInfo();
+  show(page);
+}
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-nav],[data-sec],[data-go],[data-ed],[data-info]");
+  if(!b) return;
+  if(b.dataset.info) openInfo(b.dataset.info);
+  else if(b.dataset.nav) setMode(b.dataset.nav==="home"?"home":b.dataset.nav);
+  else if(b.dataset.sec) openSection(b.dataset.sec);
+  else if(b.dataset.ed) openEd(+b.dataset.ed);
+  else if(b.dataset.go){ show(+b.dataset.go); setMode("flip"); }
+});
+document.getElementById("burger").onclick=()=>{
+  const open=body.dataset.menu==="1";
+  body.dataset.menu=open?"0":"1";
+  document.getElementById("burger").textContent=open?t("menu"):t("cerrar");
+};
+document.getElementById("tohome").onclick=()=>setMode("home");
+document.getElementById("lang").onclick=()=>setLang(L==="es"?"en":"es");
+document.getElementById("prev").onclick=goPrev;
+document.getElementById("next").onclick=goNext;
+document.getElementById("range").oninput=e=>show(+e.target.value);
+addEventListener("keydown",e=>{
+  if(mode!=="flip") return;
+  if(e.key==="ArrowRight"){goNext();e.preventDefault();}
+  if(e.key==="ArrowLeft"){goPrev();e.preventDefault();}
+});
+let x0=null,y0=null,t0x=0,t0y=0,d0=0,z0=1,mid=null,lastTap=0;
+const dist=ts=>Math.hypot(ts[0].clientX-ts[1].clientX,ts[0].clientY-ts[1].clientY);
+zoom.addEventListener("touchstart",e=>{
+  if(e.touches.length===2){
+    d0=dist(e.touches); z0=Z;
+    const r=zoom.getBoundingClientRect();
+    mid={x:(e.touches[0].clientX+e.touches[1].clientX)/2-r.left-r.width/2,
+         y:(e.touches[0].clientY+e.touches[1].clientY)/2-r.top-r.height/2};
+  }else if(e.touches.length===1){
+    x0=e.touches[0].clientX; y0=e.touches[0].clientY; t0x=tx; t0y=ty;
+    const now=Date.now();
+    if(now-lastTap<300){ setZoom(Z>1?1:2.4,0,0); lastTap=0; } else lastTap=now;
+  }
+},{passive:true});
+zoom.addEventListener("touchmove",e=>{
+  if(e.touches.length===2&&d0){ setZoom(z0*dist(e.touches)/d0,mid.x,mid.y); e.preventDefault(); }
+  else if(e.touches.length===1&&Z>1&&x0!==null){
+    tx=t0x+(e.touches[0].clientX-x0); ty=t0y+(e.touches[0].clientY-y0); applyZoom(); e.preventDefault();
+  }
+},{passive:false});
+zoom.addEventListener("touchend",e=>{
+  if(e.touches.length===0) d0=0;
+  if(Z>1||x0===null){x0=null;return;}
+  const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
+  if(Math.abs(dx)>44&&Math.abs(dx)>Math.abs(dy)) dx<0?goNext():goPrev();
+  x0=null;
+},{passive:true});
+zoom.addEventListener("dblclick",e=>{
+  const r=zoom.getBoundingClientRect();
+  setZoom(Z>1?1:2.4,e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2);
+});
+
+/* ── doble página al girar ── */
+const mqL=matchMedia("(orientation: landscape)");
+function applyOrient(){
+  SPREAD=mqL.matches;
+  body.dataset.spread=SPREAD?"1":"0";
+  show(page);
+}
+mqL.addEventListener("change",applyOrient);
+applyOrient();
+
+renderHome(); renderMenu(); show(1); setMode("home");
+</script>
+</body>
+</html>
