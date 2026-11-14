@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ColorInChic — Revista digital</title>
+<meta name="description" content="ColorInChic, revista digital trimestral de arte, moda, cultura y estilo. Desde Ecuador para el mundo. ES / EN.">
+<meta property="og:title" content="ColorInChic — Edición 01 · Revolución Cromática">
+<meta property="og:description" content="Arte · Moda · Cultura · Estilo. El color como lenguaje. La creatividad como cultura.">
+<meta property="og:image" content="img/portada-edicion-01.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&display=swap" rel="stylesheet">
@@ -15,8 +19,8 @@
   --marfil:#F3EFE8;
   --papel:#FFFFFF;
   --negro:#131110;
-  --gris:#7A736D;
-  --gris2:#ABA49D;
+  --gris:#6B645E;
+  --gris2:#8A827A;
   --edicion:#D6006B;
   --borde:rgba(19,17,16,.15);
   --bar:52px;
@@ -285,6 +289,40 @@ input[type=range]{width:100%;margin:0;accent-color:var(--edicion);height:16px}
   #stage>.page{animation:fi .2s ease}
   @keyframes fi{from{opacity:0}to{opacity:1}}
 }
+
+/* ── mejoras editoriales v2 ── */
+.panel{text-align:left;width:100%;background-color:var(--papel);transition:border-color .2s}
+.panel:hover{border-color:var(--negro)}
+.panel .pgo{position:absolute;top:14px;right:18px;font-size:9px;letter-spacing:.12em;color:var(--edicion)}
+.feat{display:grid;gap:0 28px}
+.feat button{display:flex;flex-direction:column;gap:6px;padding:18px 0 22px;border-top:1px solid var(--negro);text-align:left}
+.feat__k{font-size:9.5px;letter-spacing:.16em;color:var(--edicion);display:flex;gap:10px}
+.feat__k span{margin-left:auto;color:var(--gris);font-variant-numeric:tabular-nums}
+.feat__t{font-family:"Bodoni Moda",Georgia,serif;font-size:clamp(21px,5.6vw,26px);line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
+.feat__s{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-size:14px;line-height:1.45;color:var(--gris)}
+.feat button:hover .feat__t{color:var(--edicion)}
+.resume{display:block;margin-top:12px;font-size:10.5px;letter-spacing:.14em;color:var(--gris);border-bottom:1px solid var(--borde);padding:4px 0;width:max-content}
+.resume:hover{color:var(--negro);border-bottom-color:var(--edicion)}
+@media (min-width:760px){.feat{grid-template-columns:repeat(3,1fr)}}
+/* aperturas de sección */
+.ophead{flex:0 0 auto;display:flex;justify-content:space-between;font-size:7px;letter-spacing:.18em;color:var(--gris)}
+.onum{flex:0 0 auto;font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(34px,19cqw,104px);line-height:.78;letter-spacing:-.05em;color:var(--edicion);margin:4px 0 0}
+.otoc li{display:flex;gap:8px}
+.otoc li span:last-child{margin-left:auto;color:var(--gris);font-variant-numeric:tabular-nums}
+.oplate{flex:1;min-height:0;display:flex;align-items:flex-end;padding:8px 9px;
+  background:linear-gradient(165deg,var(--edicion),color-mix(in srgb,var(--edicion) 40%,var(--marfil)))}
+.oplate span{font-size:7px;letter-spacing:.16em;color:rgba(255,255,255,.9)}
+/* capitular y destacado */
+.bt--drop::first-letter{float:left;font-family:"Bodoni Moda",Georgia,serif;font-weight:700;font-size:3.5em;line-height:.8;padding:.07em .07em 0 0;color:var(--edicion)}
+.pq{flex:0 0 auto;border-top:1px solid var(--negro);padding-top:7px}
+.pq p{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-size:clamp(8.5px,3.2cqw,16px);line-height:1.25;margin:0;text-wrap:balance}
+/* paso de página */
+@media (prefers-reduced-motion:no-preference){
+  body[data-dir="next"] #stage>.page{animation:pgn .42s cubic-bezier(.2,.7,.2,1)}
+  body[data-dir="prev"] #stage>.page{animation:pgp .42s cubic-bezier(.2,.7,.2,1)}
+  @keyframes pgn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+  @keyframes pgp{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+}
 </style>
 </head>
 <body data-mode="home" data-lang="es">
@@ -378,6 +416,7 @@ const T = {
       cr:"© 2026 ColorInChic. Todos los derechos reservados.",
       pags:"PÁGINAS",edit:"EDITORIAL",publi:"PUBLICIDAD",total:"DEL TOTAL",
       idxl:"Cada casilla abre la página en el lector. Casilla llena: apertura de sección. Casilla punteada: espacio publicitario.",
+      enesta:"EN ESTA EDICIÓN",enestas:"LECTURAS SELECCIONADAS · ES / EN",seguir:"CONTINUAR LEYENDO · PÁGINA",sec:"SECCIÓN",apert:"FOTOGRAFÍA DE APERTURA · POR LLEGAR",
       edicion:"EDICIÓN",soon:"Esta edición aún no está publicada.",imagen:"IMAGEN POR CARGAR"},
   en:{inicio:"HOME",ediciones:"ISSUES",secciones:"SECTIONS",nav:"NAVIGATION",lectura:"READING",pasar:"Page by page",
       scroll:"Continuous scroll",indice:"Issue contents",menu:"MENU",cerrar:"CLOSE",
@@ -400,6 +439,7 @@ const T = {
       cr:"© 2026 ColorInChic. All rights reserved.",
       pags:"PAGES",edit:"EDITORIAL",publi:"ADVERTISING",total:"OF TOTAL",
       idxl:"Each cell opens that page in the reader. Solid cell: section opener. Dotted cell: advertising space.",
+      enesta:"IN THIS ISSUE",enestas:"SELECTED READS · ES / EN",seguir:"CONTINUE READING · PAGE",sec:"SECTION",apert:"OPENING PHOTOGRAPH · TO COME",
       edicion:"ISSUE",soon:"This issue has not been published yet.",imagen:"IMAGE TO BE ADDED"}
 };
 
@@ -419,16 +459,16 @@ const LB={es:{pie:"Pie de foto",cuerpo:"Cuerpo del texto",gal:"Galería · 4 im�
           en:{pie:"Caption",cuerpo:"Body text",gal:"Gallery · 4 images",img:"Image",
               imgc:"Full-page image",dest:"Pull quote",pies:"Captions",sub:"Standfirst"}};
 
-function bodyCols(A){
+function bodyCols(A,f){
   const l=LB[L];
   if(A&&A.reserved) return `<div class="slot slot--grow" style="border-style:dashed"><div class="tag">${L==="es"?"Texto de la autora · pendiente de insertar":"Author's text · to be inserted"}</div><div class="bi"><div><span>ES</span><div class="lines"></div></div><div><span>EN</span><div class="lines"></div></div></div></div>`;
-  if(A&&A.b_es) return `<div class="cols"><div class="slot"><p class="blab">ES</p><p class="bt">${A.b_es}</p></div><div class="slot"><p class="blab">EN</p><p class="bt">${A.b_en}</p></div></div>`;
+  if(A&&A.b_es) return `<div class="cols"><div class="slot"><p class="blab">ES</p><p class="bt${f?" bt--drop":""}">${A.b_es}</p></div><div class="slot"><p class="blab">EN</p><p class="bt${f?" bt--drop":""}">${A.b_en}</p></div></div>`;
   return `<div class="cols"><div class="slot"><div class="tag">${l.cuerpo} · ES</div><div class="lines"></div></div><div class="slot"><div class="tag">${l.cuerpo} · EN</div><div class="lines"></div></div></div>`;
 }
-function bodyOne(A){
+function bodyOne(A,f){
   const l=LB[L];
   if(A&&A.reserved) return `<div class="slot slot--grow" style="border-style:dashed"><div class="tag">${L==="es"?"Texto de la autora · pendiente de insertar":"Author's text · to be inserted"}</div><div class="lines"></div></div>`;
-  if(A&&A["b_"+L]) return `<div class="slot slot--grow"><p class="bt">${A["b_"+L]}</p></div>`;
+  if(A&&A["b_"+L]) return `<div class="slot slot--grow"><p class="bt${f?" bt--drop":""}">${A["b_"+L]}</p></div>`;
   return `<div class="slot slot--grow"><div class="tag">${l.cuerpo}</div><div class="bi"><div><span>ES</span><div class="lines"></div></div><div><span>EN</span><div class="lines"></div></div></div></div>`;
 }
 function tpl(kind,sec,art,first,n){
@@ -445,11 +485,13 @@ function tpl(kind,sec,art,first,n){
     case "creditos": return `<div class="page__body"><h3 class="title">${L==="es"?"Créditos":"Credits"}</h3><div class="rule"></div>${txt(L==="es"?"Créditos por pieza · autoría de imágenes":"Credits per piece · image authorship")}${band(L==="es"?"Próxima edición":"Next issue",14)}</div>`;
     case "ad": return ADS[n] ? Object.assign({cover:true},ADS[n]) : `<div class="page__body"><div class="plate"><h3>${L==="es"?"Publicidad":"Advertising"}</h3><p>${L==="es"?"ESPACIO DISPONIBLE":"SPACE AVAILABLE"} · 1200 × 1800 PX</p></div></div>`;
     case "contra": return `<div class="page__body"><div class="plate"><h3>${L==="es"?"Contraportada":"Back cover"}</h3><p>1200 × 1800 PX</p></div></div>`;
-    case "opener": return `<div class="page__body"><div style="flex:0 0 auto"><div class="rule" style="margin-bottom:12px"></div><h2 class="otitle">${sn(sec)}</h2><p class="oen">${L==="es"?SEC[sec].en:SEC[sec].es}</p><p class="oidea">${idea(sec)}</p></div>${S.arts.length?`<ul class="otoc">${S.arts.map(a=>`<li>${a["t_"+L]}</li>`).join("")}</ul>`:""}${img(l.img,"2:3")}</div>`;
+    case "opener": { const no=String(ORDER.indexOf(sec)+1).padStart(2,"0");
+      const toc=S.arts.length?`<ul class="otoc">${S.arts.map((a,i)=>`<li><span>${a["t_"+L]}</span><span>${PLAN.findIndex(p=>p[0]===sec&&p[2]===i)+1}</span></li>`).join("")}</ul>`:"";
+      return `<div class="page__body"><div class="ophead"><span>${t("edicion")} 01</span><span>${t("sec")} ${no}</span></div><p class="onum">${no}</p><div style="flex:0 0 auto"><h2 class="otitle">${sn(sec)}</h2><p class="oen">${L==="es"?SEC[sec].en:SEC[sec].es}</p><p class="oidea">${idea(sec)}</p></div>${toc}<div class="oplate"><span>${t("apert")}</span></div></div>`; }
     case "t0": return `<div class="page__body">${headArt}${img(l.img,"2:3")}</div>`;
     case "t1": return `<div class="page__body">${headArt}${img(l.imgc,"2:3 · 1200 × 1800 PX")}${band(l.pie,10)}</div>`;
-    case "t2": return `<div class="page__body">${headArt}${bodyCols(A)}${band(l.dest,12)}</div>`;
-    case "t3": return `<div class="page__body">${headArt}${imgS(l.img,"4:5")}${bodyOne(A)}</div>`;
+    case "t2": return `<div class="page__body">${headArt}${bodyCols(A,first)}${A&&A["b_"+L]?pq(A):band(l.dest,12)}</div>`;
+    case "t3": return `<div class="page__body">${headArt}${imgS(l.img,"4:5")}${bodyOne(A,first)}</div>`;
     case "t4": return `<div class="page__body">${headArt}<div class="grid4"><div class="slot slot--img"><div class="tag">1</div></div><div class="slot slot--img"><div class="tag">2</div></div><div class="slot slot--img"><div class="tag">3</div></div><div class="slot slot--img"><div class="tag">4</div></div></div>${band(l.pies,10)}</div>`;
     case "nv1": return `<div class="page__body"><div class="rule"></div><h3 class="art__t">${L==="es"?"Creador destacado":"Featured creator"}</h3><p class="art__s">${L==="es"?"Un creador por edición.":"One creator per issue."}</p>${imgS(L==="es"?"Retrato u obra":"Portrait or work","4:5")}${band(L==="es"?"Nombre · disciplina · país":"Name · discipline · country",10)}${band(l.cuerpo,18)}</div>`;
     case "nv2": return `<div class="page__body"><p class="rh">${L==="es"?"PORTFOLIOS SELECCIONADOS":"SELECTED PORTFOLIOS"}</p><div class="grid4"><div class="slot slot--img"><div class="tag">1</div></div><div class="slot slot--img"><div class="tag">2</div></div><div class="slot slot--img"><div class="tag">3</div></div><div class="slot slot--img"><div class="tag">4</div></div></div>${band(L==="es"?"Nombre · disciplina · país":"Name · discipline · country",10)}</div>`;
@@ -461,6 +503,10 @@ function tpl(kind,sec,art,first,n){
     case "cdm": return `<div class="page__body"><div class="rule"></div><h3 class="art__t">${L==="es"?"El color de la edición":"The colour of the issue"}</h3><div class="slot" style="flex:0 0 auto"><div class="tag">HEX ${L==="es"?"por definir":"to be defined"}</div><div style="height:24px;margin-top:6px;background:var(--edicion)"></div></div>${band(L==="es"?"Origen, historia y usos":"Origin, history and uses",16)}${img(l.img,"2:3")}</div>`;
     case "atl": return `<div class="page__body"><p class="rh">${L==="es"?"GUÍA COLORINCHIC":"COLORINCHIC GUIDE"}</p>${band(L==="es"?"Arte y arquitectura":"Art and architecture",12)}${band(L==="es"?"Moda y diseño":"Fashion and design",12)}${band(L==="es"?"Gastronomía":"Food",12)}${band(L==="es"?"Cultura local":"Local culture",12)}${imgS(L==="es"?"Mapa o imagen":"Map or image","4:5")}</div>`;
   }
+}
+function pq(A){
+  const ss=A["b_"+L].split(/(?<=\.)\s+/).filter(x=>x.length>30);
+  return `<div class="pq"><p>“${ss[ss.length-1].replace(/\.$/,"")}.”</p></div>`;
 }
 const openerOf=k=>PLAN.findIndex(p=>p[0]===k&&p[1]==="opener")+1;
 function fitText(root){
@@ -500,6 +546,13 @@ function pageHTML(n){
 }
 
 /* ─────────── vistas ─────────── */
+const FEAT=[["moda",0],["fotografia",1],["belleza",0],["cultura",1],["atlas",1],["colormes",0]];
+function lastPage(){ try{ return +localStorage.getItem("cic-p")||0 }catch(e){ return 0 } }
+function saveSpot(){
+  if(mode!=="flip") return;
+  try{ localStorage.setItem("cic-p",page) }catch(e){}
+  try{ history.replaceState(null,"","#p"+page) }catch(e){}
+}
 function renderHome(){
   const E=EDS;
   document.getElementById("view-home").innerHTML=`
@@ -520,15 +573,21 @@ function renderHome(){
         <h2>${t("hero")}</h2><div class="hero__rule"></div>
         <p class="sub">${t("sub")}</p>
         <button class="cta" data-go="1">${t("cta")} →</button>
+        ${lastPage()>1?`<button class="resume" data-go="${lastPage()}">${t("seguir")} ${lastPage()} →</button>`:""}
         <p class="quote">${t("quote")}</p>
         <div class="signrow"><img src="${CATH_SQ}" alt="Catherine Mora Ortiz"><p class="sign" style="margin:0"><b>Catherine Mora Ortiz</b>${t("rol")}</p></div>
       </div>
       <div class="hero__cover"><img src="${COVER}" alt="ColorInChic"></div>
       <div class="panels">
-        <div class="panel"><span class="ph">${t("imagen")}</span><h3>${t("p1")}</h3><p>${t("p1s")}</p></div>
-        <div class="panel"><span class="ph">${t("imagen")}</span><h3>${t("p2")}</h3><p>${t("p2s")}</p></div>
+        <button class="panel" data-sec="atlas"><span class="ph">${sn("atlas").toUpperCase()}</span><span class="pgo">P. ${openerOf("atlas")} →</span><h3>${t("p1")}</h3><p>${t("p1s")}</p></button>
+        <button class="panel" data-sec="arte"><span class="ph">${sn("arte").toUpperCase()}</span><span class="pgo">P. ${openerOf("arte")} →</span><h3>${t("p2")}</h3><p>${t("p2s")}</p></button>
       </div>
     </div>
+    <section class="band">
+      <div class="band__h"><h3>${t("enesta")}</h3><span>${t("enestas")}</span></div>
+      <div class="feat">${FEAT.map(([k,i])=>{const a=SEC[k].arts[i],pg=PLAN.findIndex(p=>p[0]===k&&p[2]===i)+1;
+        return `<button data-go="${pg}"><span class="feat__k">${sn(k).toUpperCase()}<span>P. ${pg}</span></span><span class="feat__t">${a["t_"+L]}</span><span class="feat__s">${a["s_"+L]}</span></button>`}).join("")}</div>
+    </section>
     <section class="band">
       <div class="band__h"><h3>${t("ultimas")}</h3><span>${t("cadencia")}</span></div>
       <div class="eds">
@@ -684,6 +743,9 @@ function setMode(m){
   mode=m; body.dataset.mode=m; body.dataset.menu="0";
   document.getElementById("burger").textContent=t("menu");
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="view-"+m));
+  if(m==="flip") saveSpot();
+  else if(/^#p\d+$/.test(location.hash)){ try{ history.replaceState(null,"",location.pathname+location.search) }catch(e){} }
+  if(m==="home") renderHome();
   if(m==="ediciones") renderEdiciones();
   if(m==="index") renderIndex();
   if(m==="scroll"){ if(!scrollBuilt) buildScroll(); }
@@ -697,6 +759,7 @@ function pairOf(n){
 }
 function show(n){
   n=Math.min(140,Math.max(1,n));
+  body.dataset.dir = n>page ? "next" : (n<page ? "prev" : "");
   pair=pairOf(n); page=pair[0];
   const st=document.getElementById("stage");
   st.innerHTML=pair.map(pageHTML).join("");
@@ -708,6 +771,7 @@ function show(n){
   document.getElementById("prev").disabled=page===1;
   document.getElementById("next").disabled=pair[pair.length-1]===140;
   resetZoom();
+  saveSpot();
 }
 const goNext=()=>show(pair[pair.length-1]+1);
 const goPrev=()=>show(pair[0]-1);
@@ -770,6 +834,7 @@ document.getElementById("prev").onclick=goPrev;
 document.getElementById("next").onclick=goNext;
 document.getElementById("range").oninput=e=>show(+e.target.value);
 addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&body.dataset.menu==="1"){ body.dataset.menu="0"; document.getElementById("burger").textContent=t("menu"); return; }
   if(mode!=="flip") return;
   if(e.key==="ArrowRight"){goNext();e.preventDefault();}
   if(e.key==="ArrowLeft"){goPrev();e.preventDefault();}
@@ -816,7 +881,10 @@ function applyOrient(){
 mqL.addEventListener("change",applyOrient);
 applyOrient();
 
+const H0=location.hash;
 renderHome(); renderMenu(); show(1); setMode("home");
+function fromHash(h){ const m=(typeof h==="string"?h:location.hash).match(/^#p(\d+)$/); if(m){ show(+m[1]); setMode("flip"); } }
+addEventListener("hashchange",()=>fromHash()); fromHash(H0);
 </script>
 </body>
 </html>
